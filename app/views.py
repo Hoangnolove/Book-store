@@ -124,6 +124,31 @@ def checkout(request):
         user_not_login = "show"
         user_login = "hidden"
     context= {'items' :items,'order' :order, 'cartItems':cartItems,'user_not_login':user_not_login,'user_login':user_login}
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        mobile = request.POST.get('mobile')
+
+        ShoppingAddress.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            order=order if request.user.is_authenticated else None,
+            name=name,
+            email=email,
+            address=address,
+            city=city,
+            mobile=mobile
+        )
+
+    context = {
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'user_not_login': user_not_login,
+        'user_login': user_login,
+    }
+
     return render(request,'app/checkout.html',context)
 def updateItem(request):
     data = json.loads(request.body)

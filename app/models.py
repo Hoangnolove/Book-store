@@ -62,13 +62,20 @@ class OrderItem(models.Model):
          total = self.product.price * self.quantity
          return total
 class ShoppingAddress(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    cusromer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)
-    order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)
-    address = models.CharField(max_length=200,null=True)
-    city = models.CharField(max_length=200,null=True)
-    state = models.CharField(max_length=200,null=True)
-    mobile = models.CharField(max_length=200,null=True)
+    customer = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    order = models.ForeignKey(
+        Order, on_delete=models.SET_NULL, null=True, blank=True
+    )
+
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    address = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    mobile = models.CharField(max_length=20)
+
     date_added = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
-            return self.address
+        return f"{self.name} - {self.address}"
