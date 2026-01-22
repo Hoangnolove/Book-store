@@ -46,7 +46,7 @@ Dự án **Bookstore** là một website bán sách được xây dựng bằng 
 * **Python:** 3.11.9
 * **Django:** 5.2.10
 * **Frontend:** HTML, CSS, Bootstrap
-* **Database:** SQLite (dev) / SQL Server (có thể mở rộng)
+* **Database:**  SQL Server (có thể mở rộng)
 * **Version Control:** Git & GitHub
 
 ---
