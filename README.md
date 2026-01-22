@@ -1,8 +1,24 @@
 # 📚 Bookstore Web Application (Django)
 
-## 📌 Mô tả dự án
+## 📑 Mục lục
 
-Dự án **Bookstore** là một website bán sách được xây dựng bằng **Django**, cho phép người dùng xem danh sách sách, tìm kiếm theo thể loại, xem chi tiết sản phẩm và đặt hàng. Hệ thống có **dashboard quản trị (Django Admin)** để quản lý dữ liệu một cách thuận tiện.
+1. [Mô tả dự án](#-mô-tả-dự-án)
+2. [Tiến độ hiện tại](#-tiến-độ-hiện-tại)
+
+   * [Đã hoàn thành](#-đã-hoàn-thành)
+   * [Đang phát triển / Dự kiến](#-đang-phát-triển--dự-kiến)
+3. [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
+4. [Hướng dẫn cài đặt & chạy thử](#-hướng-dẫn-cài-đặt--chạy-thử)
+
+   * [Clone repository](#1️⃣-clone-repository)
+   * [Tạo môi trường ảo](#2️⃣-tạo-môi-trường-ảo-khuyến-nghị)
+   * [Cài đặt thư viện](#3️⃣-cài-đặt-thư-viện)
+   * [Migrate database](#4️⃣-migrate-database)
+   * [Tạo tài khoản admin](#5️⃣-tạo-tài-khoản-admin)
+   * [Chạy server](#6️⃣-chạy-server)
+5. [Cấu trúc thư mục chính](#-cấu-trúc-thư-mục-chính)
+6. [Tác giả](#-tác-giả)
+7. [License](#-license)
 
 ---
 
@@ -46,7 +62,7 @@ Dự án **Bookstore** là một website bán sách được xây dựng bằng 
 * **Python:** 3.11.9
 * **Django:** 5.2.10
 * **Frontend:** HTML, CSS, Bootstrap
-* **Database:**  SQL Server (có thể mở rộng)
+* **Database:**  SQL Server 
 * **Version Control:** Git & GitHub
 
 ---
@@ -150,7 +166,12 @@ Book-store/
 
 ## 👤 Tác giả
 
-* **Hoàng Nguyễn**
+* **Nhóm5 - CNTT K22C**
+* **Nguyễn Lê Hoàng**
+* **Hoàng Đức Hạnh**
+* **Hoàng Duy Hanh**
+* **Nguyễn Trung Kiên**
+* **Lưu Đức Huân**
 
 ---
 
