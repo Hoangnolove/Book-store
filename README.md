@@ -41,7 +41,6 @@
   * CRUD sản phẩm (Products)
   * CRUD danh mục (Categories)
   * Quản lý đơn hàng (Orders, Order Items)
-  * Quản lý địa chỉ giao hàng (Shipping Address)
 * Dashboard quản trị:
 
   * Sử dụng **Django Admin** để quản lý toàn bộ dữ liệu
