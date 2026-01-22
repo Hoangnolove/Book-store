@@ -99,11 +99,6 @@ source venv/bin/activate
 
 ### 3️⃣ Cài đặt thư viện
 
-```bash
-pip install -r requirements.txt
-```
-
-(Nếu chưa có `requirements.txt`)
 
 ```bash
 pip install django
