@@ -1,52 +1,204 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block cart_content %}
-<div class="row" style='width:100%'>
-	<div class="col-lg-12">
-		<div class="box-element">
-
-			<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
-
-			<br>
-			<br>
-			<table class="table">
-				<tr>
-					<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
-					<th><h5>Total:<strong>{{order.get_cart_total}}</strong></h5></th>
-					<th>
-						<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
-					</th>
-				</tr>
-			</table>
-
-		</div>
-
-		<br>
-		<div class="box-element">
-			<div class="cart-row">
-				<div style="flex:2"></div>
-				<div style="flex:2"><strong>Item</strong></div>
-				<div style="flex:1"><strong>Price</strong></div>
-				<div style="flex:1"><strong>Quantity</strong></div>
-				<div style="flex:1"><strong>Total</strong></div>
+<div class="container my-4">
+  <div class="row">
+		<div class="col-lg-8">
+			<h5 class="mb-3">
+				GIỎ HÀNG ({{ order.get_cart_items }} sản phẩm)
+				</h5>
+			<div class="box-element cart-item d-flex align-items-center py-3 border-bottom">
+				<div class="col-check">
+					<input type="checkbox" id="check-all">
+					<span class="ms-2">Chọn tất cả ({{ order.get_cart_items }} sản phẩm)</span>
+				</div>
+				<div class="flex-grow-1"></div>
+				<div class="text-center me-4 ">Số lượng</div>
+				<div class="text-danger fw-bold ">Thành tiền</div>
 			</div>
-			{% for item in items %}
-			<div class="cart-row">
-				<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
-				<div style="flex:2"><p>{{item.product.name}}</p></div>
-				<div style="flex:1"><p>{{item.product.price}}</p></div>
-				<div style="flex:1">
-					<p class="quantity">{{item.quantity}}</p>
-					<div class="quantity">
-						<img data-product = {{item.product.id}} data-action = "add" class="chg-quantity update-cart" src="{% static  'app/images/arrow-up.png' %}">
-				
-						<img data-product = {{item.product.id}} data-action = "remove" class="chg-quantity update-cart" src="{% static  'app/images/arrow-down.png' %}">
+			<br>
+			<div class="box-element">
+
+				{% for item in items %}
+				<div class="cart-item d-flex align-items-center py-3 border-bottom">
+
+				<div class="me-3">
+					<input 	type="checkbox"
+							class="check-item"
+							checked
+							data-item-id="{{ item.id }}">
+
+				</div>
+
+				<div class="me-3">
+					<img src="{{ item.product.ImageURL }}" style="width:80px;">
+				</div>
+
+				<div class="flex-grow-1">
+					<p class="mb-1 fw-bold">{{ item.product.name }}</p>
+					<p class="mb-1 text-danger">{{ item.product.price_vnd }}</p>
+				</div>
+
+				<div class="text-center me-4">
+					<div class="d-flex align-items-center">
+					<button class="btn btn-sm btn-light update-cart"
+							data-product="{{ item.product.id }}"
+							data-action="remove">−</button>
+
+					<span class="mx-2">{{ item.quantity }}</span>
+
+					<button class="btn btn-sm btn-light update-cart"
+							data-product="{{ item.product.id }}"
+							data-action="add">+</button>
 					</div>
 				</div>
-				<div style="flex:1"><p>$32</p></div>
+
+				<div class="text-danger fw-bold">
+					{{ item.total_vnd }}
+				</div>
+				<div>
+					<button class="btn btn-link text-muted p-0 remove-item"
+							data-product="{{ item.product.id }}"
+							title="Xóa sản phẩm">
+						<i class="bi bi-trash fs-5"></i>
+					</button>
+				</div>
+
+				</div>
+				
+				{% endfor %}
 			</div>
-			{% endfor %}
 		</div>
+		
+		<div class="col-lg-4">
+			<br><br>
+			<div class="box-element">
+
+				<h5 class="mb-3">Thanh toán</h5>
+
+				<div class="d-flex justify-content-between mb-2">
+					<span>Thành tiền</span>
+					<strong>{{ order.cart_total_vnd }}</strong>
+				</div>
+
+				<hr>
+
+				<div class="d-flex justify-content-between mb-3">
+					<span>Tổng tiền</span>
+					<span class="fs-5 text-danger fw-bold">
+						{{ order.cart_total_vnd }}
+					</span>
+				</div>
+
+				<form id="checkout-form" method="POST" action="{% url 'checkout' %}">
+					{% csrf_token %}
+					<input type="hidden" name="selected_items" id="selected-items">
+					<button type="submit"
+							id="checkout-btn"
+							class="btn btn-danger w-100 py-2">
+						THANH TOÁN
+					</button>
+				</form>
+
+
+
+			</div>
+		</div>
+
 	</div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const checkAll = document.getElementById("check-all");
+    const itemChecks = document.querySelectorAll(".check-item");
+    const checkoutBtn = document.getElementById("checkout-btn");
+	const checkoutForm = document.getElementById("checkout-form");
+    const selectedInput = document.getElementById("selected-items");
+
+	function getSelectedIds() {
+        return [...itemChecks]
+            .filter(cb => cb.checked)
+            .map(cb => cb.dataset.itemId);
+    }
+	
+    function updateCheckoutState() {
+        const checkedItems = [...itemChecks].filter(cb => cb.checked);
+
+        if (checkedItems.length === 0) {
+            checkoutBtn.classList.add("disabled");
+            checkoutBtn.style.pointerEvents = "none";
+            checkoutBtn.style.opacity = "0.6";
+        } else {
+            checkoutBtn.classList.remove("disabled");
+            checkoutBtn.style.pointerEvents = "auto";
+            checkoutBtn.style.opacity = "1";
+        }
+
+        checkAll.checked =
+            itemChecks.length > 0 &&
+            checkedItems.length === itemChecks.length;
+    }
+
+    updateCheckoutState();
+
+    checkAll.addEventListener("change", function () {
+        itemChecks.forEach(cb => cb.checked = checkAll.checked);
+        updateCheckoutState();
+    });
+
+    itemChecks.forEach(cb => {
+        cb.addEventListener("change", updateCheckoutState);
+    });
+
+    checkoutBtn.addEventListener("click", function (e) {
+        if (checkoutBtn.classList.contains("disabled")) {
+            e.preventDefault();
+        }
+    });
+
+	checkoutForm.addEventListener("submit", function () {
+        selectedInput.value = JSON.stringify(getSelectedIds());
+    });
+});
+document.addEventListener("click", function (e) {
+    const btn = e.target.closest(".remove-item");
+    if (!btn) return;
+
+    const productId = btn.dataset.product;
+
+    fetch("/update_item/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken")
+        },
+        body: JSON.stringify({
+            productId: productId,
+            action: "delete"
+        })
+    })
+    .then(res => res.json())
+    .then(() => {
+        location.reload(); 
+    });
+});
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        document.cookie.split(";").forEach(cookie => {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + "=")) {
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+            }
+        });
+    }
+    return cookieValue;
+}
+</script>
+
+
 {% endblock cart_content %}

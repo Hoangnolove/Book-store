@@ -1,35 +1,55 @@
 var updateBtns = document.getElementsByClassName('update-cart')
 
-for (i=0;i < updateBtns.length;i++){
-    updateBtns[i].addEventListener('click',function(){
-        var productId = this.dataset.product
-        var action = this.dataset.action
-        console.log('productId',productId,'action',action)
-        console.log('user: ',user)
-        if (user === "AnonymousUser"){
-            console.log('user not logged')
-        } else {
-            updateUserOrder(productId,action)
-        }
+for (let btn of updateBtns){
+    btn.addEventListener('click', function(e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        updateUserOrder(
+            this.dataset.product,
+            this.dataset.action
+        )
     })
 }
 
-function updateUserOrder(productId,action){
-    console.log('user logged in, success add')
-    var url = '/update_item/'
-    fetch(url,{
+function updateUserOrder(productId, action){
+    fetch('/update_item/', {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json',
-            'X-CSRFToken': csrftoken,
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         },
-        body: JSON.stringify({'productId':productId,'action':action})
-     })
-     .then((response) =>{
-      return  response.json()
-     })
-     .then((data) =>{
-        console.log('data',data)
-        location.reload()
-     })
+        body: JSON.stringify({ productId, action })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (action === 'add') {
+            showCartToast('Đã thêm sản phẩm vào giỏ hàng 🛒', 'success')
+        }
+
+        const cartTotal = document.getElementById('cart-total')
+        if (cartTotal && data.cartItems !== undefined) {
+            cartTotal.innerText = data.cartItems
+        }
+    })
+    .catch(() => {
+        showCartToast('Có lỗi xảy ra', 'danger')
+    })
+}
+
+
+window.showCartToast = function (message, type = 'warning') {
+    const toastEl = document.getElementById('cartToast')
+    const toastBody = document.getElementById('cartToastBody')
+
+    toastBody.innerText = message
+
+    toastEl.classList.remove(
+        'text-bg-success',
+        'text-bg-danger',
+        'text-bg-warning'
+    )
+    toastEl.classList.add(`text-bg-${type}`)
+
+    new bootstrap.Toast(toastEl, { delay: 1500 }).show()
 }

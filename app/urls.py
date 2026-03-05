@@ -8,9 +8,11 @@ urlpatterns = [
     path('login/', views.loginPage, name="login"),
     path('search/', views.search, name="search"),
     path('category/', views.category, name="category"),
-    path('detail/', views.detail, name="detail"),
+    path('detail/<int:id>/', views.detail, name='detail'),
     path('logout/', views.logoutPage, name="logout"),
     path('cart/', views.cart, name="cart"),
     path('checkout/', views.checkout, name="checkout"),
     path('update_item/', views.updateItem, name="update_item"),
+    path("api/suggest/", views.search_suggestions, name="search_suggestions"),
+
 ]
