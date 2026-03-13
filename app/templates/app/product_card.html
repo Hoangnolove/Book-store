@@ -1,0 +1,43 @@
+{% load humanize %}
+<div class="product-card h-100 border-0 shadow-sm p-2 rounded">
+    <a href="{% url 'detail' product.id %}" class="text-decoration-none text-dark">
+        <div class="position-relative">
+            <img src="{{ product.ImageURL }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain;">
+            
+           
+            {% if product.is_on_sale %}
+                <span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 m-2 rounded" style="font-size: 0.7rem;">
+                    -{{ product.sale_percent }}%
+                </span>
+            {% endif %}
+        </div>
+        
+        <div class="card-body p-2">
+            <h6 class="product-title" style="font-size: 0.9rem; height: 2.4em; overflow: hidden; margin-bottom: 0.5rem;">{{ product.name }}</h6>
+            
+            <div class="price-section mt-2">
+                {% if product.is_on_sale %}
+                    
+                    <span class="text-danger fw-bold fs-6">{{ product.discount_price_vnd }} đ</span>
+                    <br>
+                    
+                    <small class="text-muted text-decoration-line-through" style="font-size: 0.8rem;">{{ product.price_vnd }} đ</small>
+                {% else %}
+                    
+                    <span class="text-danger fw-bold fs-6">{{ product.price_vnd }} đ</span>
+                {% endif %}
+            </div>
+
+            
+            <div class="text-muted mt-1" style="font-size: 0.75rem;">
+                Đã bán: {{ product.sold|default:0 }}
+            </div>
+        </div>
+    </a>
+    
+    <button data-product="{{ product.id }}"
+                                    data-action="add"
+                                    class="btn btn-outline-secondary add-btn update-cart">
+        Thêm vào giỏ
+    </button>
+</div>

@@ -1,41 +1,104 @@
-{%  extends 'app/base.html'  %}
+{% extends 'app/base.html' %}
 {% load static %}
-{% load humanize %}
-        {% block register %}
-        
-        <div class="container my-5">
-            <div class="row g-4">
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="border p-3 rounded shadow-sm bg-white">
+                <a href="{% url 'category_all' %}" class="fw-bold">NHÓM SẢN PHẨM</a>
+               <ul class="list-unstyled">
+                    {% for main_cat in all_categories %}
+                        {% if not active_category or active_category == main_cat or active_category.sub_category == main_cat %}
+                            <li class="mb-2">
+                                <a href="#sub-{{ main_cat.id }}" class="text-decoration-none text-dark fw-bold d-block" 
+                                data-bs-toggle="collapse" role="button" aria-expanded="{% if active_category == main_cat or active_category.sub_category == main_cat %}true{% else %}false{% endif %}">
+                                    {{ main_cat.name }} ▼
+                                </a>
+                                
+                                <div class="collapse {% if active_category == main_cat or active_category.sub_category == main_cat %}show{% endif %}" id="sub-{{ main_cat.id }}">
+                                    <ul class="list-unstyled ps-3 mt-2">
+                                        {% for sub in main_cat.sub_categories.all %}
+                                            <li>
+                                                <a href="{% url 'category' sub.slug %}" class="text-decoration-none {% if active_category == sub %}text-primary fw-bold{% else %}text-muted{% endif %}">
+                                                    - {{ sub.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <hr>
+                <form method="GET" id="filterForm" action="{% if active_category %}{% url 'category' active_category.slug %}{% else %}{% url 'category_all' %}{% endif %}">
+
+                <h5 class="fw-bold">GIÁ</h5>
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="price" value="0-150"
+                onchange="this.form.submit()" {% if "0-150" in selected_prices %}checked{% endif %}>
+                <label class="form-check-label">0đ - 150,000đ</label>
+                </div>
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="price" value="150-300"
+                onchange="this.form.submit()" {% if "150-300" in selected_prices %}checked{% endif %}>
+                <label class="form-check-label">150,000đ - 300,000đ</label>
+                </div>
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="price" value="300-500"
+                onchange="this.form.submit()" {% if "300-500" in selected_prices %}checked{% endif %}>
+                <label class="form-check-label">300,000đ - 500,000đ</label>
+                </div>
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="price" value="500-700"
+                onchange="this.form.submit()" {% if "500-700" in selected_prices %}checked{% endif %}>
+                <label class="form-check-label">500,000đ - 700,000đ</label>
+                </div>
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="price" value="700+"
+                onchange="this.form.submit()" {% if "700+" in selected_prices %}checked{% endif %}>
+                <label class="form-check-label">700,000đ - Trở lên</label>
+                </div>
+
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-9 bg-white">
+
+            <div class="row row-cols-1 row-cols-md-4 g-4">
                 {% for product in products %}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="box-element product product-card h-100"
-                        data-href="{% url 'detail' product.id %}"
-                        style="cursor:pointer;">
-
-                        <img class="thumbnail"
-                            src="{{ product.ImageURL }}"
-                            style="width:100%; height:250px; object-fit:contain;">
-
-                        <h6 class="mt-2">
-                            <strong>{{ product.name }}</strong>
-                        </h6>
-
-                       
-
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button data-product="{{ product.id }}"
-                                    data-action="add"
-                                    class="btn btn-outline-secondary add-btn update-cart">
-                                add to cart
-                            </button>
-
-                            <span class="fw-bold">
-                                {{ product.price_vnd }} VND
-                            </span>
-                        </div>
-
-                    </div>
+                <div class="col">
+                    {% include 'app/product_card.html' with product=product %}
                 </div>
                 {% endfor %}
             </div>
         </div>
-        {% endblock register %}
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const currentPath = window.location.pathname;
+    const activeLink = document.querySelector(`a[href="${currentPath}"]`);
+    
+    if (activeLink) {
+        
+        const parentCollapse = activeLink.closest('.collapse');
+        if (parentCollapse) {
+            parentCollapse.classList.add('show');
+           
+            const toggleButton = document.querySelector(`a[href="#${parentCollapse.id}"]`);
+            if (toggleButton) toggleButton.setAttribute('aria-expanded', 'true');
+        }
+    }
+});
+</script>
+{% endblock content %}

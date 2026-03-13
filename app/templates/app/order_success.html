@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5 text-center">
+    <div class="card shadow p-5">
+        <div class="mb-4">
+            <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+        </div>
+        <h2 class="fw-bold text-uppercase">Đặt hàng thành công!</h2>
+        <p class="lead">Cảm ơn bạn đã mua sắm tại <strong>BookStore</strong>.</p>
+        <p class="text-muted">Mã đơn hàng của bạn là: <strong>#{{ order_id }}</strong></p>
+        <hr>
+        <p>Chúng tôi sẽ sớm liên hệ với bạn qua số điện thoại để xác nhận đơn hàng.</p>
+        <div class="mt-4">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary btn-lg">Tiếp tục mua sắm</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

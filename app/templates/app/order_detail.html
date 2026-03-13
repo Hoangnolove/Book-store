@@ -1,0 +1,88 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm">
+                <div class="card-header  ">
+                    <h4 class="mb-0 text-white">Chi tiết đơn hàng #{{ order.id }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Thông tin đơn hàng</h5>
+                            <p><strong>Ngày đặt:</strong> {{ order.date_order|date:"d/m/Y H:i" }}</p>
+                            <p><strong>Trạng thái:</strong> 
+                                {% if order.status == 'Pending' %}
+                                    <span class="badge badge-warning text-dark">Chờ xác nhận</span>
+                                {% elif order.status == 'Delivered' %}
+                                    <span class="badge badge-success">Đã giao hàng</span>
+                                {% elif order.status == 'Cancelled' %}
+                                    <span class="badge badge-danger">Đã hủy</span>
+                                {% else %}
+                                    <span class="badge badge-info">{{ order.get_status_display }}</span>
+                                {% endif %}
+                            </p>
+                            <p><strong>Thanh toán:</strong> {{ order.payment_method }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Ghi chú:</h5>
+                            <p class="text-muted">{{ order.note|default:"Không có ghi chú" }}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h5>Sản phẩm đã đặt</h5>
+                    <div class="table-responsive">
+                        <table class="table borderless">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng cộng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ item.product.ImageURL }}" style="width: 50px; margin-right: 15px;">
+                                            <span>{{ item.product.name }}</span>
+                                        </div>
+                                    </td>
+                                    <td>{{ item.product.price_vnd }}</td>
+                                    <td>x {{ item.quantity }}</td>
+                                    <td><strong>{{ item.total_vnd }}</strong></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-right mt-3">
+                        <h4>Tổng thanh toán: <span class="text-danger">{{ order.cart_total_vnd }}</span></h4>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{% url 'user_orders' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Quay lại
+                    </a>
+
+                    {% if order.status == 'Pending' %}
+                        <form action="{% url 'cancel_order' order.id %}" method="POST" 
+                            onsubmit="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-x-circle"></i> Hủy đơn hàng
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

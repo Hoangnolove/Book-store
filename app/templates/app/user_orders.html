@@ -1,0 +1,48 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Lịch sử đơn hàng của bạn</h2>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th>Ngày đặt</th>
+                <th>Trạng thái</th>
+                <th>Tổng tiền</th>
+                <th>Thanh toán</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order.id }}</td>
+                <td>{{ order.date_order|date:"d/m/Y H:i" }}</td>
+                <td>
+                    {% if order.status == 'Pending' %}
+                        <span class="badge badge-warning text-dark">Chờ xác nhận</span>
+                    {% elif order.status == 'Delivered' %}
+                        <span class="badge badge-success">Đã giao hàng</span>
+                    {% elif order.status == 'Cancelled' %}
+                        <span class="badge badge-danger">Đã hủy</span>
+                    {% else %}
+                        <span class="badge badge-info">{{ order.get_status_display }}</span>
+                    {% endif %}
+                </td>
+                <td><strong>{{ order.cart_total_vnd }}</strong></td>
+                <td>{{ order.payment_method }}</td>
+                <td>
+                    <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-outline-primary">
+                        Xem chi tiết
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">Bạn chưa có đơn hàng nào.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

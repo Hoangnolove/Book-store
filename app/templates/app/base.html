@@ -67,14 +67,13 @@
                                 <div class="dropdown-menu w-100 mt-0 border-0 shadow-lg p-4 mega-menu">
                                     <div class="row">
 
-                                        <!-- LEFT -->
                                         <div class="col-md-3 border-end">
                                             <h6 class="fw-bold mb-3">Danh mục sản phẩm</h6>
                                            <ul class="list-unstyled category-left">
                                                 {% for cat in categories %}
                                                 <li>
-                                                    <a href="{% url 'category' %}?category={{ cat.slug }}"
-                                                    class="category-parent d-block py-2"
+                                                    <a href="{% url 'category' cat.slug %}" 
+                                                    class="category-parent d-block py-2" 
                                                     data-target="cat-{{ cat.id }}">
                                                         {{ cat.name }}
                                                     </a>
@@ -83,14 +82,13 @@
                                             </ul>
                                         </div>
 
-                                        <!-- RIGHT -->
                                         <div class="col-md-9">
 
                                             {% for cat in categories %}
                                             <div class="category-content d-none" id="cat-{{ cat.id }}">
 
                                                 <h5 class="fw-bold mb-3">
-                                                    <a href="{% url 'category' %}?category={{ cat.slug }}"
+                                                    <a href="{% url 'category' cat.slug %}" 
                                                     class="text-dark text-decoration-none">
                                                         {{ cat.name }}
                                                     </a>
@@ -99,7 +97,7 @@
                                                 <div class="row">
                                                     {% for sub in cat.sub_categories.all %}
                                                     <div class="col-md-4 mb-2">
-                                                        <a href="{% url 'category' %}?category={{ sub.slug }}"
+                                                        <a href="{% url 'category' sub.slug %}" 
                                                         class="sub-link d-block py-1">
                                                             {{ sub.name }}
                                                         </a>
@@ -162,6 +160,11 @@
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
+                                    <a class="dropdown-item" href="{% url 'user_orders' %}">
+                                        <i class="bi bi-box-seam me-2"></i> Đơn hàng của tôi
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item" href="{% url 'logout' %}">
                                         Đăng xuất
                                     </a>
@@ -182,34 +185,50 @@
 
             </div>
         </nav>
+        <div id="main-wrapper">
+            {% block banner_slider  %}{% endblock banner_slider %}
+            {% block main-content %}{% endblock main-content%}
+            {% block cart_content %}{% endblock cart_content %}
+            {% block content_checkout %}{% endblock content_checkout %}
+            {% block register %}{% endblock register %}
+            {% block login %}{% endblock login %}
+            {% block content %}{% endblock content %}
 
-        {% block banner_slider  %}{% endblock banner_slider %}
-        {% block main-content %}{% endblock main-content%}
-        {% block cart_content %}{% endblock cart_content %}
-        {% block content_checkout %}{% endblock content_checkout %}
-        {% block register %}{% endblock register %}
-        {% block login %}{% endblock login %}
-       <footer class="container-fluid bg-success text-center p-3 mt-5 text-white">
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="cartToast" class="toast shadow-lg border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body" id="cartToastBody">
+                            Đã thêm sản phẩm vào giỏ hàng 🛒
+                        </div>
+                        <button type="button"
+                                class="btn-close me-2 m-auto"
+                                data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-3">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+       <footer class="container-fluid footer-custom text-center p-3 mt-5 text-white">
             <h6 class="mb-1" style="font-family: Georgia, serif;">
                 📖 Mỗi trang sách – Một thế giới mở ra
             </h6>
             <small class="opacity-75">Sách giấy cho mọi lứa tuổi</small><br>
         </footer>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="cartToast" class="toast shadow-lg border-0" role="alert">
-            <div class="d-flex">
-                <div class="toast-body" id="cartToastBody">
-                    Đã thêm sản phẩm vào giỏ hàng 🛒
-                </div>
-                <button type="button"
-                        class="btn-close me-2 m-auto"
-                        data-bs-dismiss="toast"></button>
-            </div>
-        </div>
-    </div>
     <script src="{%static 'app/js/cart.js' %}?v=2" > </script>   
     <script>
-      
+        function parseMarkdownLinks(text) {
+            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, 
+                '<a href="$2" class="text-primary" style="text-decoration: underline;" target="_blank">$1</a>');
+        }
         document.querySelectorAll('.navbar .dropdown').forEach(dropdown => {
             dropdown.addEventListener('mouseenter', function () {
                 if (window.innerWidth >= 992) {
@@ -342,11 +361,107 @@
 
         });
         
-
-    </script>
-
-
     
+    document.addEventListener("DOMContentLoaded", function() {
+        const chatCircle = document.getElementById('chat-circle');
+        const chatBox = document.getElementById('chat-box');
+        const chatClose = document.getElementById('chat-close');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatContent = document.getElementById('chat-content');
+
+        
+        chatCircle.onclick = () => chatBox.classList.toggle('d-none');
+        chatClose.onclick = () => chatBox.classList.add('d-none');
+
+        
+        function sendMessage() {
+            const msg = chatInput.value.trim();
+            if (!msg) return;
+
+            
+            const userDiv = document.createElement('div');
+            userDiv.className = "mb-2 text-end";
+            const userSpan = document.createElement('span');
+            userSpan.className = "bg-success text-white p-2 rounded d-inline-block";
+            userSpan.textContent = msg; 
+            userDiv.appendChild(userSpan);
+            chatContent.appendChild(userDiv);
+            
+            chatInput.value = "";
+            chatContent.scrollTop = chatContent.scrollHeight;
+
+            
+            const loaderId = 'bot-loader';
+            const loaderDiv = document.createElement('div');
+            loaderDiv.id = loaderId;
+            loaderDiv.className = "mb-2 text-start";
+            loaderDiv.innerHTML = '<span class="bg-light p-2 rounded d-inline-block text-muted">...</span>';
+            chatContent.appendChild(loaderDiv);
+            chatContent.scrollTop = chatContent.scrollHeight;
+
+            
+            fetch('/api/chatbot/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ message: msg })
+            })
+            .then(res => res.json())
+            
+            .then(data => {
+                document.getElementById(loaderId).remove();
+                
+                const botDiv = document.createElement('div');
+                botDiv.className = "mb-2 text-start";
+                const botSpan = document.createElement('span');
+                botSpan.className = "bg-light p-2 rounded d-inline-block";
+                
+                
+                botSpan.innerHTML = parseMarkdownLinks(data.reply); 
+                
+                botDiv.appendChild(botSpan);
+                chatContent.appendChild(botDiv);
+                chatContent.scrollTop = chatContent.scrollHeight;
+            })
+            .catch(err => {
+                document.getElementById(loaderId).remove();
+                chatContent.innerHTML += `
+                    <div class="mb-2 text-start">
+                        <span class="bg-danger text-white p-2 rounded">Lỗi kết nối chatbot</span>
+                    </div>`;
+            });
+        }
+
+        chatSend.onclick = sendMessage;
+        chatInput.onkeypress = (e) => { if(e.key === "Enter") sendMessage(); };
+    });
+    </script>
+    
+
+    <div id="chat-circle" class="btn btn-success rounded-circle shadow-lg position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; cursor: pointer; z-index: 1000;">
+        <i class="bi bi-chat-dots-fill fs-3"></i>
+    </div>
+
+    <div id="chat-box" class="card position-fixed bottom-0 end-0 m-4 shadow-lg d-none" style="width: 350px; height: 450px; z-index: 1001;">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <span>Hỗ trợ khách hàng</span>
+            <button type="button" id="chat-close" class="btn-close btn-close-white"></button>
+        </div>
+        <div class="card-body overflow-auto" id="chat-content" style="font-size: 14px;">
+            <div class="mb-2 text-start"><span class="bg-light p-2 rounded d-inline-block">Chào bạn! Mình có thể giúp gì cho bạn?</span></div>
+        </div>
+        <div class="card-footer bg-white">
+            <div class="input-group">
+                <input type="text" id="chat-input" class="form-control border-0" placeholder="Nhập câu hỏi...">
+                <button class="btn btn-outline-success border-0" id="chat-send">
+                    <i class="bi bi-send-fill"></i>
+                </button>
+            </div>
+        </div>
+    </div>
     </body>
     
 </html>
