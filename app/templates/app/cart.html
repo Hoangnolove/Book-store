@@ -37,7 +37,7 @@
 
 				<div class="flex-grow-1">
 					<p class="mb-1 fw-bold">{{ item.product.name }}</p>
-					<p class="mb-1 text-danger">{{ item.product.price_vnd }}</p>
+					<p class="mb-1 text-danger">{{ item.product.price_vnd|floatformat:0|intcomma }} đ </p>
 				</div>
 
 				<div class="text-center me-4">
@@ -55,7 +55,7 @@
 				</div>
 
 				<div class="text-danger fw-bold">
-					{{ item.total_vnd }}
+					{{ item.get_total|floatformat:0|intcomma }} đ
 				</div>
 				<div>
 					<button class="btn btn-link text-muted p-0 remove-item"
@@ -79,7 +79,7 @@
 
 				<div class="d-flex justify-content-between mb-2">
 					<span>Thành tiền</span>
-					<strong>{{ order.cart_total_vnd }}</strong>
+					<strong>{{ order.get_cart_total|floatformat:0|intcomma }} đ</strong>
 				</div>
 
 				<hr>
@@ -87,7 +87,7 @@
 				<div class="d-flex justify-content-between mb-3">
 					<span>Tổng tiền</span>
 					<span class="fs-5 text-danger fw-bold">
-						{{ order.cart_total_vnd }}
+						{{ order.get_cart_total|floatformat:0|intcomma }} đ
 					</span>
 				</div>
 

@@ -21,69 +21,47 @@ from django.views.decorators.http import require_POST
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
-print(f"DEBUG: API Key load được là: {api_key}")
 if not api_key:
     raise ValueError("Không tìm thấy GEMINI_API_KEY trong .env") 
 genai.configure(api_key=api_key)
 
-
 def chatbot_api(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            user_message = data.get("message", "").strip()
-            
-            
-            stop_words = ["tìm", "cho", "tôi", "sách", "về", "muốn", "có", "là"]
-            keywords = [word for word in user_message.lower().split() if word not in stop_words]
-            
-            
-            query = Q()
-            for word in keywords:
-                query |= Q(name__icontains=word) | Q(category__name__icontains=word) | Q(detail__icontains=word)
-                
-            products = Product.objects.filter(query).distinct()[:5]
-            
-           
-            if products.exists():
-                product_context = "Các sản phẩm phù hợp:\n"
-                for p in products:
-                    
-                    url = f"/product/{p.id}/" 
-                    product_context += f"- [{p.name}]({url}) | Giá: {p.final_price:,.0f}đ\n"
-            else:
-                product_context = "Không tìm thấy sách cụ thể."
-
-           
-            all_categories = Category.objects.all()
-            category_context = "Các danh mục bạn có thể tham khảo:\n"
-            for c in all_categories:
-                url = f"/category/{c.slug}/"
-                category_context += f"- [{c.name}]({url})\n"
-           
-            model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
-            prompt = f"""
-            Bạn là trợ lý tư vấn tại Book Store. 
-            Thông tin kho sách hiện có:
-            {product_context}
-            {category_context}
-            Khách hàng hỏi: "{user_message}"
-            
-            Yêu cầu trả lời:
-            - Nếu tìm thấy sách, hãy giới thiệu kèm link định dạng [Tên sách](/product/id/).
-            - Nếu khách tìm theo thể loại, hãy giới thiệu link danh mục định dạng [Tên danh mục](/category/slug/).
-            - Tuyệt đối không gửi link văn bản thô, hãy dùng định dạng Markdown [Tên](Link).
-            """
-            
-            response = model.generate_content(prompt)
-            print(products.query)
-            return JsonResponse({"reply": response.text})
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
         
+    try:
+        data = json.loads(request.body)
+        user_message = data.get("message", "").strip()
+        
+        
+        stop_words = ["tìm", "cho", "tôi", "sách", "về", "muốn"]
+        keywords = [word for word in user_message.lower().split() if word not in stop_words]
+        
+        query = Q()
+        if keywords:
+            for word in keywords[:3]: 
+                query |= Q(name__icontains=word) | Q(category__name__icontains=word)
+        
+        
+        products = Product.objects.filter(query).distinct()[:5]
+        
+        
+        product_list = [f"- [{p.name}](/detail/{p.id}/): {p.final_price}đ" for p in products]
+        context_str = "\n".join(product_list) if product_list else "Hết hàng hoặc không có sách này."
 
-        except Exception as e:
-            import traceback
-            traceback.print_exc()  
-            return JsonResponse({"reply": f"Lỗi: {str(e)}"}, status=500)
+        
+        model = genai.GenerativeModel(
+            model_name="gemini-3.1-flash-lite-preview", 
+            system_instruction="Bạn là nhân viên tiệm sách BookStore. Chỉ tư vấn dựa trên danh sách sách được cung cấp. Luôn dùng Markdown để gửi link."
+        )
+        
+        prompt = f"Khách hỏi: {user_message}\nKho sách hiện có:\n{context_str}"
+        response = model.generate_content(prompt)
+        
+        return JsonResponse({"reply": response.text})
+
+    except Exception as e:
+        return JsonResponse({"reply": "Xin lỗi, hệ thống đang bận."}, status=500)
         
 
 custom_filters = template.Library()
@@ -130,7 +108,7 @@ def order_detail(request, order_id):
         return render(request, 'app/404.html') 
 
    
-    items = order.orderitem_set.all()
+    items = order.items.all()
     
     context = {
         'order': order,
@@ -142,7 +120,7 @@ def detail(request, id):
     product = get_object_or_404(Product, id=id)
 
     if order:
-        items = order.orderitem_set.all()
+        items = order.items.all()
         cartItems = order.get_cart_items
     else:
         items = []
@@ -173,77 +151,91 @@ def search_suggestions(request):
     return JsonResponse(data, safe=False)
 
 def search_fuzzy(request):
-    query = request.GET.get('q')
-    products = Product.objects.all()
-    results = []
+    query = request.GET.get('q', '')
+    if len(query) < 2:
+        return render(request, 'search.html', {'products': []})
 
-    if query:
-        for p in products:
-            score = fuzz.partial_ratio(query.lower(), p.name.lower())
-            if score > 70:  
-                results.append(p)
+    words = query.split()
+    search_query = Q()
+    for word in words:
+        search_query |= Q(name__icontains=word)
+    
+    candidates = Product.objects.filter(search_query)[:50] 
+
+    
+    results = []
+    for p in candidates:
+        score = fuzz.partial_ratio(query.lower(), p.name.lower())
+        if score > 60:
+            p.search_score = score 
+            results.append(p)
+    
+    results.sort(key=lambda x: x.search_score, reverse=True)
 
     return render(request, 'search.html', {'products': results})
+
 def category_view(request, category_slug=None):
+  
     order = get_order(request)
+    cartItems = order.get_cart_items if (order and hasattr(order, 'id')) else 0
     
-    if order:
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        items = []
-        cartItems = 0
     
     all_main_categories = Category.objects.filter(sub_category__isnull=True)
     
+    
     if category_slug:
-      
         active_category = get_object_or_404(Category, slug=category_slug)
+        
         sub_categories = active_category.sub_categories.all()
         products = Product.objects.filter(
             Q(category=active_category) | Q(category__in=sub_categories)
-        )
+        ).distinct()
     else:
-      
         active_category = None
         products = Product.objects.all()
 
-    price_filter = request.GET.getlist('price')
-
-    selected_prices = request.GET.get('price')
-
-    if price_filter:
-
-        for price in price_filter:
-
+  
+    price_filters = request.GET.getlist('price') 
+    if price_filters:
+        price_queries = Q()
+        for price in price_filters:
             if price == "0-150":
-                products = products.filter(price__lte=150000)
-
+                price_queries |= Q(price__lte=150000)
             elif price == "150-300":
-                products = products.filter(price__gte=150000, price__lte=300000)
-
+                price_queries |= Q(price__gte=150000, price__lte=300000)
             elif price == "300-500":
-                products = products.filter(price__gte=300000, price__lte=500000)
-
+                price_queries |= Q(price__gte=300000, price__lte=500000)
             elif price == "500-700":
-                products = products.filter(price__gte=500000, price__lte=700000)
-
+                price_queries |= Q(price__gte=500000, price__lte=700000)
             elif price == "700+":
-                products = products.filter(price__gte=700000)
-    
-    order = get_order(request)
-    if order:
-        cartItems = order.get_cart_items
+                price_queries |= Q(price__gte=700000)
+        
+        products = products.filter(price_queries)
+
+    price_range_labels = [
+        ('0-150', '0đ - 150,000đ'),
+        ('150-300', '150,000đ - 300,000đ'),
+        ('300-500', '300,000đ - 500,000đ'),
+        ('500-700', '500,000đ - 700,000đ'),
+        ('700+', '700,000đ - Trở lên'),
+    ]
+
+    sort_by = request.GET.get('sort')
+    if sort_by == 'price_asc':
+        products = products.order_by('price')
+    elif sort_by == 'price_desc':
+        products = products.order_by('-price')
     else:
-        cartItems = 0
+        products = products.order_by('-id') 
 
     context = {
-        'products': products,
+        'products': products.only('name', 'price', 'image', 'sale_percent'), 
         'active_category': active_category,
         'all_categories': all_main_categories, 
-        'selected_prices': [selected_prices] if selected_prices else [],
-        'order': order,
-        'cartItems': cartItems
+        'selected_prices': price_filters, 
+        'order': order if (order and hasattr(order, 'id')) else {'get_cart_total': 0},
+        'cartItems': cartItems,
+        'price_range_labels': price_range_labels,
     }
     return render(request, 'app/category.html', context)
 def search(request):
@@ -253,7 +245,7 @@ def search(request):
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer =customer,complete =False)
-        items = order.orderitem_set.all()
+        items = order.items.all()
         cartItems = order.get_cart_items
     else:
         items =[]
@@ -317,24 +309,27 @@ def logoutPage(request):
 def home(request):
     order = get_order(request)
     
-    
-    if order and order.pk:
-        items = order.orderitem_set.all()
+    if order and hasattr(order, 'pk'):
+        
+        items = order.items.all() 
         cartItems = order.get_cart_items
     else:
         
         items = []
         cartItems = 0
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
 
-    tham_khao_products = Product.objects.filter(category__slug='Stk')
-    products = Product.objects.all()
+   
+    tham_khao_products = Product.objects.filter(category__slug='Stk').only('name', 'price', 'image')
+    products = Product.objects.all().only('name', 'price', 'image', 'sale_percent')
 
+ 
     context = {
         'tham_khao_products': tham_khao_products,
         'products': products,
         'items': items,
-        'order': order,
         'cartItems': cartItems,
+        'order': order, 
     }
     return render(request, 'app/home.html', context)
 
@@ -342,17 +337,18 @@ def cart(request):
     order = get_order(request)
 
     
-    if order is None:
-        items = []
-        cartItems = 0
-        
-        order = {'get_cart_total': 0, 'get_cart_items': 0} 
-    else:
+    if order and hasattr(order, 'pk'):
+       
         if not request.user.is_authenticated:
             sync_cookie_cart_to_order(request, order)
         
-        items = order.orderitem_set.all()
+        
+        items = order.items.all()
         cartItems = order.get_cart_items
+    else:
+        items = []
+        cartItems = 0
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
 
     response = render(request, 'app/cart.html', {
         'items': items,
@@ -364,50 +360,49 @@ def cart(request):
         response.delete_cookie('cart')
 
     return response
-
 def checkout(request):
     order = get_order(request)
     if not order:
         return redirect('cart')
 
-    
     if not request.user.is_authenticated:
         sync_cookie_cart_to_order(request, order)
 
-    
     selected_ids = request.session.get("checkout_items", [])
-    if selected_ids:
-        items = order.orderitem_set.filter(id__in=selected_ids)
-    else:
-        items = order.orderitem_set.all()
+    items = order.items.filter(id__in=selected_ids) if selected_ids else order.items.all()
 
     if not items.exists():
         return redirect('cart')
 
-   
     if request.method == "POST" and "address" in request.POST:
         name = request.POST.get('name')
         mobile = request.POST.get('mobile')
         city = request.POST.get('city')
         address = request.POST.get('address')
+        payment_method = request.POST.get('payment_method') 
 
         if name and mobile and city and address:
-           
             ShoppingAddress.objects.create(
                 customer=request.user if request.user.is_authenticated else None,
                 order=order,
                 name=name, mobile=mobile, city=city, address=address
             )
             
-            
+           
+            order.total_price = order.get_cart_total 
+         
+
             order.transaction_id = f"{datetime.datetime.now().strftime('%Y%m%d')}-{order.id}"
             order.complete = True
             order.status = 'Pending'
-            order.save()
-            
+            order.payment_method = payment_method 
+            order.save() 
             
             if 'checkout_items' in request.session:
                 del request.session['checkout_items']
+            
+            if payment_method == 'bank':
+                return redirect('payment_gateway', order_id=order.id)
             
             response = redirect('order_success', order_id=order.id)
             response.delete_cookie('cart')
@@ -416,6 +411,17 @@ def checkout(request):
     context = {"items": items, "order": order, "cartItems": items.count()}
     return render(request, "app/checkout.html", context)
 
+def payment_gateway(request, order_id):
+    bank_id = "VCB" 
+    account_no = "123456789"
+    order = Order.objects.get(id=order_id)
+    amount = order.get_cart_total 
+    description = f"THANH TOAN DON HANG {order.transaction_id}"
+    
+    qr_url = f"https://img.vietqr.io/image/{bank_id}-{account_no}-compact.png?amount={amount}&addInfo={description}"
+    
+    return render(request, "app/payment.html", {"qr_url": qr_url, "order": order})
+
 def order_success(request, order_id):
     return render(request, 'app/order_success.html', {'order_id': order_id})
 
@@ -423,17 +429,12 @@ def order_success(request, order_id):
 def get_order(request):
     
     if request.user.is_authenticated:
-      
-        return Order.objects.filter(customer=request.user, complete=False).first()
-    
-   
-    else:
-        session_key = request.session.session_key
-        if not session_key:
-            return None
         
-   
-        return Order.objects.filter(session_key=session_key, complete=False).first()
+        return Order.objects.filter(customer=request.user, complete=False).first()
+    else:
+        if not request.session.session_key:
+            return None 
+        return Order.objects.filter(session_key=request.session.session_key, complete=False).first()
 def sync_cookie_cart_to_order(request, order):
     if not order:
         return
@@ -469,43 +470,40 @@ def updateItem(request):
 
     product = get_object_or_404(Product, id=productId)
 
+    
     if request.user.is_authenticated:
-   
         order, created = Order.objects.get_or_create(customer=request.user, complete=False)
     else:
-     
+      
         if not request.session.session_key:
             request.session.create()
-        order, created = Order.objects.get_or_create(
-            session_key=request.session.session_key, 
-            complete=False
-        )
-  
+        session_id = request.session.session_key
+        order, created = Order.objects.get_or_create(session_key=session_id, complete=False)
 
+   
     orderItem, created = OrderItem.objects.get_or_create(
-        order=order,
-        product=product
+        order=order, 
+        product=product,
+        defaults={'price_at_order': product.price} 
     )
 
+   
     if action == 'add':
         orderItem.quantity += 1
-        orderItem.save()
     elif action == 'remove':
         orderItem.quantity -= 1
-        if orderItem.quantity <= 0:
-            orderItem.delete()
-        else:
-            orderItem.save()
-    elif action == 'delete':   
-        orderItem.delete()
+    elif action == 'delete':
+        orderItem.quantity = 0 
     else:
         return JsonResponse({'error': 'Invalid action'}, status=400)
 
- 
-    if order.orderitem_set.count() == 0:
-       
-        pass
+   
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+    else:
+        orderItem.save()
 
+   
     return JsonResponse({
         'status': 'ok',
         'cartItems': order.get_cart_items

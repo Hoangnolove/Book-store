@@ -1,0 +1,71 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content_checkout %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="box-element shadow-sm p-4">
+                <h3 class="text-center mb-4 text-success">💰 Thanh toán chuyển khoản</h3>
+                <hr>
+                
+                <div class="row">
+                    <div class="col-md-6 text-center border-end">
+                        <h6>Quét mã VietQR bằng ứng dụng Ngân hàng</h6>
+                        <div class="my-3">
+                            <img src="{% static 'images/prbank.jpg' %}" alt="Mã QR Thanh toán" class="img-fluid border p-2 bg-white" style="max-width: 250px;">
+                        </div>
+                        <p class="small text-muted italic">Mã QR này chứa sẵn số tiền và nội dung chuyển khoản</p>
+                    </div>
+
+                    <div class="col-md-6 ps-md-4">
+                        <h5>Thông tin đơn hàng</h5>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><strong>Mã đơn hàng:</strong> <span class="text-primary">#{{ order.transaction_id }}</span></li>
+                            <li class="mb-2"><strong>Số tiền:</strong> <span class="text-danger fw-bold fs-5">{{ order.cart_total_vnd }} đ</span></li>
+                        </ul>
+                        
+                        <div class="alert alert-info py-2 mt-3">
+                            <h6 class="alert-heading">Thông tin tài khoản:</h6>
+                            <p class="mb-1 small">Ngân hàng: <strong>MBbank (VCB)</strong></p>
+                            <p class="mb-1 small">Số tài khoản: <strong>123456789</strong></p>
+                            <p class="mb-0 small">Chủ TK: <strong>NGUYEN Lê Hoàng</strong></p>
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="{% url 'order_success' order.id %}" class="btn btn-success w-100 mb-2">
+                                Tôi đã chuyển khoản thành công
+                            </a>
+                            <a href="{% url 'cart' %}" class="btn btn-outline-secondary btn-sm w-100">
+                                Quay lại giỏ hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="mt-3">
+                    <h6 class="fw-bold"><i class="fas fa-info-circle"></i> Hướng dẫn:</h6>
+                    <ol class="small text-muted">
+                        <li>Mở ứng dụng ngân hàng (Mobile Banking) của bạn.</li>
+                        <li>Chọn chức năng <strong>Quét mã QR</strong>.</li>
+                        <li>Kiểm tra số tiền và nội dung (phải khớp với thông tin trên).</li>
+                        <li>Bấm <strong>Xác nhận</strong> và giữ lại biên lai thanh toán.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .box-element {
+        border-radius: 8px;
+        background-color: #fff;
+        border: 1px solid #e1e1e1;
+    }
+    .text-primary { color: #007bff !important; }
+    .text-danger { color: #dc3545 !important; }
+</style>
+{% endblock content_checkout %}

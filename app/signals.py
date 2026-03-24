@@ -5,11 +5,19 @@ from .models import Order
 
 @receiver(post_save, sender=Order)
 def update_stock_and_sold(sender, instance, created, **kwargs):
-    if instance.complete:
 
-        order_items = instance.orderitem_set.all()
+    if instance.complete:
+        order_items = instance.items.all()
         for item in order_items:
             product = item.product
             if product:
+              
                 product.sold += item.quantity
+                
+                
+                product.stock = max(0, product.stock - item.quantity)
+                
+               
                 product.save()
+
+    

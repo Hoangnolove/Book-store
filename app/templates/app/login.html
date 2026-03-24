@@ -90,11 +90,10 @@
 
                 if (togglePassword && passwordInput) {
                     togglePassword.addEventListener('click', function (e) {
-                        // Chuyển đổi giữa 'password' và 'text'
+                        
                         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                         passwordInput.setAttribute('type', type);
                         
-                        // Thay đổi icon con mắt (eye <-> eye-slash)
                         this.classList.toggle('fa-eye');
                         this.classList.toggle('fa-eye-slash');
                     });

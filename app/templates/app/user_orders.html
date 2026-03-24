@@ -19,14 +19,19 @@
                 <td>#{{ order.id }}</td>
                 <td>{{ order.date_order|date:"d/m/Y H:i" }}</td>
                 <td>
+                    
                     {% if order.status == 'Pending' %}
-                        <span class="badge badge-warning text-dark">Chờ xác nhận</span>
+                        <span class="badge bg-warning text-dark">Chờ xác nhận</span>
+                    {% elif order.status == 'Processing' %}
+                        <span class="badge bg-primary">Đang xử lý</span>
+                    {% elif order.status == 'Shipped' %}
+                        <span class="badge bg-info text-white">Đang giao hàng</span>
                     {% elif order.status == 'Delivered' %}
-                        <span class="badge badge-success">Đã giao hàng</span>
+                         <span class="badge bg-success">Đã giao hàng</span>
                     {% elif order.status == 'Cancelled' %}
-                        <span class="badge badge-danger">Đã hủy</span>
+                        <span class="badge bg-danger">Đã hủy</span>
                     {% else %}
-                        <span class="badge badge-info">{{ order.get_status_display }}</span>
+                        <span class="badge bg-secondary">{{ order.get_status_display }}</span>
                     {% endif %}
                 </td>
                 <td><strong>{{ order.cart_total_vnd }}</strong></td>
