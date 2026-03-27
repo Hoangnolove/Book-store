@@ -4,7 +4,7 @@ from django.http import HttpResponse,JsonResponse
 from .models import *
 import os
 import re
-import google.generativeai as genai
+#import google.generativeai as genai
 import json
 import datetime
 from .form import RegisterForm
@@ -23,7 +23,7 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     raise ValueError("Không tìm thấy GEMINI_API_KEY trong .env") 
-genai.configure(api_key=api_key)
+#genai.configure(api_key=api_key)
 
 def chatbot_api(request):
     if request.method != "POST":
@@ -50,15 +50,15 @@ def chatbot_api(request):
         context_str = "\n".join(product_list) if product_list else "Hết hàng hoặc không có sách này."
 
         
-        model = genai.GenerativeModel(
-            model_name="gemini-3.1-flash-lite-preview", 
-            system_instruction="Bạn là nhân viên tiệm sách BookStore. Chỉ tư vấn dựa trên danh sách sách được cung cấp. Luôn dùng Markdown để gửi link."
-        )
+        #model = genai.GenerativeModel(
+            #model_name="gemini-3.1-flash-lite-preview", 
+            #system_instruction="Bạn là nhân viên tiệm sách BookStore. Chỉ tư vấn dựa trên danh sách sách được cung cấp. Luôn dùng Markdown để gửi link."
+        #)
         
         prompt = f"Khách hỏi: {user_message}\nKho sách hiện có:\n{context_str}"
-        response = model.generate_content(prompt)
+        #response = model.generate_content(prompt)
         
-        return JsonResponse({"reply": response.text})
+        #return JsonResponse({"reply": response.text})
 
     except Exception as e:
         return JsonResponse({"reply": "Xin lỗi, hệ thống đang bận."}, status=500)
