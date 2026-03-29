@@ -32,7 +32,7 @@
 				</div>
 
 				<div class="me-3">
-					<img src="{{ item.product.ImageURL }}" style="width:80px;">
+					<img src="{% static 'images/' %}{{ item.product.image }}" style="width:80px;">
 				</div>
 
 				<div class="flex-grow-1">
@@ -66,11 +66,11 @@
 				</div>
 
 				</div>
-				
+
 				{% endfor %}
 			</div>
 		</div>
-		
+
 		<div class="col-lg-4">
 			<br><br>
 			<div class="box-element">
@@ -120,8 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		button.addEventListener("click", function() {
 			const productId = this.dataset.product;
 			const action = this.dataset.action;
-			
-			fetch("/update_item/", { 
+
+			fetch("/update_item/", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -131,11 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			})
 			.then(response => response.json())
 			.then(data => {
-				
-				
-				
-				
-				location.reload(); 
+
+
+
+
+				location.reload();
 			});
 		});
 	});
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .filter(cb => cb.checked)
             .map(cb => cb.dataset.itemId);
     }
-	
+
     function updateCheckoutState() {
         const checkedItems = [...itemChecks].filter(cb => cb.checked);
 
@@ -206,7 +206,7 @@ document.addEventListener("click", function (e) {
     })
     .then(res => res.json())
     .then(() => {
-        location.reload(); 
+        location.reload();
     });
 });
 

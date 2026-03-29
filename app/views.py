@@ -144,7 +144,8 @@ def search_suggestions(request):
         {
             "id": p.id,
             "name": p.name,
-            "image": p.image.url if p.image else "",
+            "image": p.image.name.split('/')[-1] if p.image else "",
+            "price": p.price if hasattr(p, 'price') else 0,
         }
         for p in products
     ]

@@ -1,0 +1,246 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$vQ3t1x1SIY5kxjNQvXsToe$OWwPEPtr9spPNi0nN/qai1SIVcgNe9sCME2y7Klc1zw=",
+        "last_login": "2026-03-27T13:47:53.618Z",
+        "is_superuser": true,
+        "username": "Hoangadmin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-01-19T17:35:19.198Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$P85UqjbR0GWnfG3egAttgx$7yBFxqxkKukGS0cG64sbSMlM+kgXwqLYP8QZuNiSXuk=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Hanh",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-10T06:24:11.528Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$sY82NAH49xzls2wMZ4XA46$X04fQOZrCKRLibxlQtuksDqf5ocIvCrWrVEy6niBaL4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Hoang",
+        "first_name": "",
+        "last_name": "",
+        "email": "main1022mm@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-12T08:24:55.044Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app.order",
+    "pk": 1879,
+    "fields": {
+        "customer": [
+            "Hoangadmin"
+        ],
+        "date_order": "2026-03-22T07:20:04.032Z",
+        "complete": true,
+        "is_processed": true,
+        "session_key": null,
+        "transaction_id": "20260322-1879",
+        "status": "Pending",
+        "total_price": "177500",
+        "payment_method": "cod"
+    }
+},
+{
+    "model": "app.order",
+    "pk": 1906,
+    "fields": {
+        "customer": null,
+        "date_order": "2026-03-22T09:57:54.480Z",
+        "complete": false,
+        "is_processed": false,
+        "session_key": "bxkenup8xzwdtbq7clez4iff1xn13nsq",
+        "transaction_id": null,
+        "status": "Pending",
+        "total_price": "0",
+        "payment_method": "COD"
+    }
+},
+{
+    "model": "app.order",
+    "pk": 1907,
+    "fields": {
+        "customer": [
+            "Hoangadmin"
+        ],
+        "date_order": "2026-03-22T10:16:34.085Z",
+        "complete": true,
+        "is_processed": true,
+        "session_key": null,
+        "transaction_id": "20260322-1907",
+        "status": "Pending",
+        "total_price": "217000",
+        "payment_method": "cod"
+    }
+},
+{
+    "model": "app.order",
+    "pk": 1908,
+    "fields": {
+        "customer": [
+            "Hoangadmin"
+        ],
+        "date_order": "2026-03-24T04:53:23.645Z",
+        "complete": false,
+        "is_processed": false,
+        "session_key": null,
+        "transaction_id": null,
+        "status": "Pending",
+        "total_price": "0",
+        "payment_method": "COD"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 166,
+    "fields": {
+        "product": 7,
+        "order": 1879,
+        "quantity": 1,
+        "price_at_order": "30500",
+        "date_added": "2026-03-22T07:55:26.895Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 167,
+    "fields": {
+        "product": 15,
+        "order": 1879,
+        "quantity": 1,
+        "price_at_order": "61000",
+        "date_added": "2026-03-22T07:55:29.064Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 168,
+    "fields": {
+        "product": 3,
+        "order": 1879,
+        "quantity": 1,
+        "price_at_order": "86000",
+        "date_added": "2026-03-22T09:55:23.072Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 169,
+    "fields": {
+        "product": 3,
+        "order": 1907,
+        "quantity": 1,
+        "price_at_order": "86000",
+        "date_added": "2026-03-22T10:16:35.517Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 170,
+    "fields": {
+        "product": 4,
+        "order": 1907,
+        "quantity": 1,
+        "price_at_order": "118000",
+        "date_added": "2026-03-22T10:16:36.635Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 171,
+    "fields": {
+        "product": 8,
+        "order": 1907,
+        "quantity": 1,
+        "price_at_order": "13000",
+        "date_added": "2026-03-22T10:16:38.452Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 172,
+    "fields": {
+        "product": 17,
+        "order": 1908,
+        "quantity": 1,
+        "price_at_order": "99000",
+        "date_added": "2026-03-24T05:25:44.649Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 173,
+    "fields": {
+        "product": 14,
+        "order": 1908,
+        "quantity": 1,
+        "price_at_order": "141000",
+        "date_added": "2026-03-24T05:25:45.774Z"
+    }
+},
+{
+    "model": "app.orderitem",
+    "pk": 174,
+    "fields": {
+        "product": 13,
+        "order": 1908,
+        "quantity": 1,
+        "price_at_order": "256000",
+        "date_added": "2026-03-24T05:25:46.017Z"
+    }
+},
+{
+    "model": "app.shoppingaddress",
+    "pk": 19,
+    "fields": {
+        "order": 1879,
+        "customer": [
+            "Hoangadmin"
+        ],
+        "name": "hủd",
+        "mobile": "07345637",
+        "city": "tfsg",
+        "address": "thtrf"
+    }
+},
+{
+    "model": "app.shoppingaddress",
+    "pk": 20,
+    "fields": {
+        "order": 1907,
+        "customer": [
+            "Hoangadmin"
+        ],
+        "name": "hitffds",
+        "mobile": "084574624",
+        "city": "thde",
+        "address": "yhfrw"
+    }
+}
+]

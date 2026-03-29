@@ -1,0 +1,486 @@
+[
+{
+    "model": "app.category",
+    "pk": 1,
+    "fields": {
+        "sub_category": null,
+        "name": "Lich sử - Địa lý - Tôn giáo",
+        "slug": "lS-DL-TG"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 2,
+    "fields": {
+        "sub_category": 18,
+        "name": "Nấu ăn",
+        "slug": "nauan"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 6,
+    "fields": {
+        "sub_category": null,
+        "name": "Giáo Khoa - Tham Khảo",
+        "slug": "gk-tk"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 7,
+    "fields": {
+        "sub_category": 6,
+        "name": "Sách Tham Khảo",
+        "slug": "Stk"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 8,
+    "fields": {
+        "sub_category": 6,
+        "name": "Sách Giáo Khoa",
+        "slug": "SGK"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 9,
+    "fields": {
+        "sub_category": 6,
+        "name": "Đại học",
+        "slug": "DH"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 10,
+    "fields": {
+        "sub_category": 6,
+        "name": "Sách Giáo Viên",
+        "slug": "SGV"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 11,
+    "fields": {
+        "sub_category": null,
+        "name": "Văn Học",
+        "slug": "VH"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 12,
+    "fields": {
+        "sub_category": 11,
+        "name": "Tiểu thuyết",
+        "slug": "TT"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 13,
+    "fields": {
+        "sub_category": 11,
+        "name": "Truyện ngắn - Tản văn",
+        "slug": "TN-TV"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 14,
+    "fields": {
+        "sub_category": 11,
+        "name": "Du Ký",
+        "slug": "DK"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 15,
+    "fields": {
+        "sub_category": 1,
+        "name": "Lich sử",
+        "slug": "LS"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 16,
+    "fields": {
+        "sub_category": 1,
+        "name": "Địa lý",
+        "slug": "DL"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 17,
+    "fields": {
+        "sub_category": 1,
+        "name": "Tôn Giáo",
+        "slug": "TG"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 18,
+    "fields": {
+        "sub_category": null,
+        "name": "Gia Đình",
+        "slug": "Gd"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 19,
+    "fields": {
+        "sub_category": 18,
+        "name": "Mẹo Vặt - Cẩm Nang",
+        "slug": "MV-CN"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 20,
+    "fields": {
+        "sub_category": 18,
+        "name": "Làm Đẹp",
+        "slug": "LD"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 21,
+    "fields": {
+        "sub_category": null,
+        "name": "Manga - comic",
+        "slug": "MG-CM"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 22,
+    "fields": {
+        "sub_category": 21,
+        "name": "Manga",
+        "slug": "MG"
+    }
+},
+{
+    "model": "app.category",
+    "pk": 23,
+    "fields": {
+        "sub_category": 21,
+        "name": "Comic - Truyện Tranh",
+        "slug": "CM-TT"
+    }
+},
+{
+    "model": "app.product",
+    "pk": 1,
+    "fields": {
+        "name": "Viêt sử kiêu hùng",
+        "price": "199000",
+        "image": "vietssu.jpg",
+        "detail": "Việt Sử Kiêu Hùng - Quyển 2 Hào Khí Đông A – 3 lần đại thắng Mông Nguyên - nhà quân sự lỗi lạc thế giới Trần Hưng Đạo – Phật hoàng Trần Nhân Tông: \r\n\r\nĐọc sử không phải để thuộc lòng mà là tiến trình khơi gợi trí tưởng tượng, ngược dòng về quá khứ ngàn năm khám phá cội nguồn & tinh hoa của dân tộc. \r\n\r\nQuyển 2 tập trung kể về nhà Trần và tái hiện những trận đánh kinh thiên động địa của dân tộc nhỏ bé Việt Nam chống lại thế lực hùng mạnh nhất thế giới đương thời Mông - Nguyên. Từ đó nổi bật lên những anh hùng thiên cổ lưu danh: Trần Hưng Đạo, Trần Nhân Tông, Trần Quốc Toản, Trần Khánh Dư, Phạm Ngũ Lão, Yết Kiêu... Và thời hoàng kim của Phật giáo khi khai sinh vị Phật hoàng Trần Nhân Tông. Thật hạnh phúc khi quyển sách này được đồng hành cùng bạn trên hành trình TÌM VỀ CỘI NGUỒN CỦA DÂN TỘC & NHỮNG ĐẠO LÝ BẤT BIẾN CỦA LỊCH SỬ. Đời sống của mỗi chúng ta không đủ dài để có...",
+        "sold": 0,
+        "stock": 0,
+        "sale_percent": 0,
+        "category": [
+            15
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 2,
+    "fields": {
+        "name": "Về nhà ăn cơm",
+        "price": "189000",
+        "image": "com_1Z3N9ak.jpg",
+        "detail": "Ăn chay không chỉ còn nằm ở khuôn khổ tâm linh mà ngày nay còn đang dần trở thành xu hướng được nhiều người chọn lựa kể cả những bạn trẻ.\r\n\r\nBởi vậy, càng ngày đồ ăn chay càng được chế biến đa dạng, cầu kì và nhiều dinh dưỡng hơn. Món ăn chay hiện nay không đơn thuần là những món ăn đơn giản với những nguyên liệu chủ yếu từ rau củ, đậu nành, đậu hũ... lặp đi lặp lại như trước nữa. Với những nguyên liệu mới, phong phú và cách chế biến đa dạng, món chay đã trở thành món ăn cao cấp, sang trọng với hương vị mới mẻ và được trình bày đẹp mắt.\r\n\r\nVới 45 công thức thuần chay đơn giản, dễ nấu trong “Về ăn cơm”- cái tên thân thương gợi lên bữa cơm gia đình đầm ấm sẽ thổi một làn gió mới vào căn bếp nhỏ trong mỗi gia đình để các bạn được tiếp thêm cảm hứng với lối ăn uống lành mạnh này cũng như sẽ đập tan được mọi định kiến của bạn về “ăn chay giả thịt”, hay ăn chay là nhạt nhẽo đã tồn tại trong tâm thức của người Việt suốt một thời gian dài.",
+        "sold": 2,
+        "stock": 231,
+        "sale_percent": 0,
+        "category": [
+            2
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 3,
+    "fields": {
+        "name": "Giấc mơ mỹ-đường đến stanford",
+        "price": "86000",
+        "image": "stanford_rW31czY.jpg",
+        "detail": "“Giấc mơ Mỹ - Đường đến Stanford” không phải là một cuốn cẩm nang du học với những gợi ý đi đâu, ăn gì, hay làm sao để nhận học bổng. Bởi Huyền Chip chưa từng và không bao giờ chọn đi lối mòn, không ngại thử thách và luôn khát khao sống khác biệt. \r\n\r\nHọc xong cấp ba, cô không thi đại học mà nhận lời mời làm việc ở một công ty Malaysia. Khi công việc đang tiến triển thuận lợi, cô từ bỏ công việc mơ ước để đi vòng quanh thế giới. Về nước sau chuyến đi kéo dài gần ba năm qua ba châu lục, cô khiến tất cả sửng sốt khi báo tin mình nhận được học bổng toàn phần tại một trong những ngôi trường hàng đầu thế giới. Cô bỏ lại sau lưng những chuyến đi dài ngày và những câu chuyện thị phi để trở thành một sinh viên tưởng như bất bình thường nhưng thực sự lại rất bình thường ở một ngôi trường đặc biệt như Stanford. Bạn sẽ tìm được gì trong nhật ký về những năm đầu tại trường đại học của một cô gái như vậy?",
+        "sold": 3,
+        "stock": 242,
+        "sale_percent": 0,
+        "category": [
+            14
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 4,
+    "fields": {
+        "name": "Sapiens-Lược sử loài người",
+        "price": "118000",
+        "image": "sapiens_Fnxz3H6.webp",
+        "detail": "Đây là cuốn sách bán chạy nhất của tờ Sunday Times. Trái đất đã 4,5 tỷ năm tuổi. Chỉ trong một khoảng thời gian ngắn ngủi đó, một loài trong vô số loài khác đã chinh phục nó. Đó là chúng ta. Chúng ta là loài động vật tiên tiến nhất và tàn phá nhất từng tồn tại. Điều gì khiến chúng ta trở nên xuất sắc? Điều gì khiến chúng ta trở nên nguy hiểm? Điều gì khiến chúng ta được gọi là Sapiens? Trong cuốn sách táo bạo và đầy tính khiêu khích này, Yuval Noah Harari khám phá chúng ta là ai, chúng ta đến từ đâu và chúng ta sẽ đi về đâu. Sapiens là một câu chuyện ly kỳ về lịch sử phi thường của loài người - từ thời kỳ đồ đá đến thời kỳ silicon - và hành trình của chúng ta từ những con vượn nhỏ bé trở thành những kẻ thống trị thế giới. \"Cuốn sách đề cập đến những câu hỏi lớn nhất của lịch sử và của thế giới hiện đại, và được viết bằng ngôn ngữ sống động khó quên. Bạn sẽ yêu thích nó!\" (Jared Diamond, tác giả của cuốn sách Guns, Germs and Steel).",
+        "sold": 4,
+        "stock": 243,
+        "sale_percent": 0,
+        "category": [
+            15
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 5,
+    "fields": {
+        "name": "60 Đề Minh Họa Tốt Nghiệp THPT 2026 - Môn Toán",
+        "price": "150000",
+        "image": "60dethpttoan.jpg",
+        "detail": "60 Đề Minh Họa Tốt Nghiệp THPT 2026 - Môn Toán\r\n\r\nCuốn sách ĐỀ MINH HỌA TỐT NGHIỆP THPT 2026 là cuốn sách tự học, tự luyện thi chất lượng - toàn diện - cập nhật mới nhất, dành riêng cho các sĩ tử 2K8 chinh phục kỳ thi Tốt nghiệp THPT năm 2026.\r\n\r\nĐIỂM KHÁC BIỆT NỔI BẬT SO VỚI BỘ ĐỀ NĂM 2025:\r\n\r\n- Tăng 10 đề (từ 50 lên 60 đề), giúp học sinh có kho bài tập chất lượng hơn.\r\n\r\n- Bổ sung PHẦN MỘT: Phân tích cấu trúc đề thi - giúp định hướng ôn tập đúng hướng ngay từ đầu.\r\n\r\n- Nguồn bài tập tiếp tục được cập nhật với tính mới cao, bám sát và mở rộng ma trận đề thi.\r\n\r\nNội dung sách gồm 2 phần:\r\n\r\nPHẦN MỘT: PHÂN TÍCH CẤU TRÚC ĐỀ THI và ĐỊNH HƯỚNG ÔN TẬP\r\n\r\n- Phân tích chi tiết ma trận kiến thức, cấu trúc đề thi chính thức và đề tham khảo kỳ thi Tốt nghiệp THPT 2025 của Bộ GD&ĐT.\r\n\r\n- Hướng dẫn cách làm từng dạng câu hỏi cụ thể, giúp học sinh nắm được cách xử lý thông tin và phương pháp suy luận với từng dạng bài.\r\n\r\n- Kèm TÀI LIỆU PDF phân tích cấu trúc đề thi trong khóa học đi kèm.\r\n\r\nPHẦN HAI: 60 ĐỀ MINH HỌA\r\n\r\n- 60 đề thi được biên soạn bám sát xu hướng ra đề mới nhất.\r\n\r\n- Ma trận kiến thức bao phủ toàn bộ chương trình học.\r\n\r\n- Mỗi đề có đầy đủ các dạng câu hỏi với các mức độ khác nhau.\r\n\r\nĐẶC BIỆT, cuốn sách tích hợp mã ID giúp học sinh truy cập hệ thống học tập toàn diện:\r\n\r\n- 100% câu hỏi có lời giải chi tiết dạng text\r\n\r\n- Có video hướng dẫn theo từng mã ID\r\n\r\n- Có livestream chữa đề trực tiếp cùng giáo viên\r\n\r\n- Kết hợp giải đáp thắc mắc trên web/app.\r\n\r\nĐỐI TƯỢNG SỬ DỤNG\r\n\r\n- Học sinh lớp 12 ôn thi Tốt nghiệp THPT 2026.\r\n\r\n- Học sinh lớp 11 ôn luyện sớm để chuẩn bị cho kỳ thi Tốt nghiệp THPT.\r\n\r\n- Giáo viên sử dụng làm tài liệu tham khảo, giảng dạy và ôn thi cho học sinh.",
+        "sold": 2,
+        "stock": 352,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 6,
+    "fields": {
+        "name": "80 Đề Minh Họa Thi Vào 10 - Môn Tiếng Anh",
+        "price": "150000",
+        "image": "80delop10tienganh.jpg",
+        "detail": "80 Đề Minh Họa Thi Vào 10 - Môn Tiếng Anh\r\n\r\nBộ sách ĐỀ MINH HỌA THI VÀO 10 là cuốn sách tự học, tự luyện thi chất lượng - toàn diện - cập nhật mới nhất, dành riêng cho học sinh lớp 9 chuẩn bị cho kỳ thi tuyển sinh vào lớp 10 THPT.\r\n\r\nNội dung sách gồm 80 đề thi được biên soạn dựa theo cấu trúc đề minh họa và tuyển sinh vào 10 từ năm 2025 của các Sở Giáo dục và Đào tạo trên cả nước; trong đó:\r\n\r\n- Phần 1: 80 đề minh họa\r\n\r\n- Phần 2: Đáp án - gợi ý\r\n\r\nĐẶC BIỆT, cuốn sách tích hợp mã ID giúp học sinh truy cập hệ thống học tập toàn diện:\r\n\r\n- 100% câu hỏi có lời giải chi tiết dạng text\r\n\r\n- Có video hướng dẫn theo từng mã ID\r\n\r\n- Livestream chữa đề trực tiếp cùng giáo viên\r\n\r\n- Kết hợp giải đáp thắc mắc trên web/app.\r\n\r\nĐỐI TƯỢNG SỬ DỤNG\r\n\r\n- Học sinh lớp 9 ôn thi vào lớp 10 THPT trên cả nước.\r\n\r\n- Học sinh muốn luyện đề sâu, nắm vững mọi cấu trúc và dạng bài.\r\n\r\n- Giáo viên dùng làm tài liệu tham khảo, ôn tập cho học sinh.",
+        "sold": 7,
+        "stock": 865,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 7,
+    "fields": {
+        "name": "Atlat Địa Lí Việt Nam",
+        "price": "30500",
+        "image": "9786044354231.webp",
+        "detail": "Atlat Địa Lí Việt Nam (Chỉnh Sửa Năm 2025)\r\n\r\nĐã cập nhật đầy đủ địa giới hành chính của 34 tỉnh, thành phố trên cả nước.\r\n\r\nSố liệu, bản đồ và nội dung được hiệu chỉnh theo tình hình kinh tế – xã hội mới nhất.\r\n\r\nBố cục rõ ràng, dễ tra cứu, hỗ trợ hiệu quả cho việc học và ôn tập môn Địa lí.\r\n\r\nPhù hợp cho giáo viên, học sinh THCS – THPT trong giảng dạy, học tập và thi cử.",
+        "sold": 7,
+        "stock": 244,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 8,
+    "fields": {
+        "name": "Toán 12 - Tập 2",
+        "price": "13000",
+        "image": "9786040392732.webp",
+        "detail": "Toán 12 - Tập 2 (Kết Nối) (Chuẩn)\r\n\r\nSách biên soạn theo chương trình giáo dục phổ thông mới. Các kiến thức trong sách được chủ yếu xuất phát từ những tình huống của cuộc sống quanh ta và trở lại giúp ta giải quyết những vấn đề của cuộc sống. Vì thế, khi học Toán theo cuốn sách này, các em sẽ cảm nhận được rằng, Toán học thật là gần gũi.\r\n\r\nCung cấp cho các em những kiến thức chuyên sâu, bổ ích, lí thú và thiết thực, giúp các em hình thành kĩ năng thực hành, khả năng logic, kĩ năng vận dụng kiến thức đã học ở phần nội dung cơ bản vào giải quyết vấn đề thực tế.",
+        "sold": 4,
+        "stock": 241,
+        "sale_percent": 0,
+        "category": [
+            8
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 9,
+    "fields": {
+        "name": "Toán 12 - Tập 1",
+        "price": "14000",
+        "image": "9786040392749.webp",
+        "detail": "Toán 12 - Tập 1 (Kết Nối) (Chuẩn)\r\n\r\nCác kiến thức trình bày ở đây chủ yếu xuất phát từ những tình huống của cuộc sống quanh ta và trở lại giúp ta giải quyết những vấn đề của cuộc sống. Vì thế, khi học Toán theo cuốn sách này, các em sẽ cảm nhận được rằng, Toán học thật là gần gũi\r\n\r\nĐoạn mở đầu của các chương, các bài học thường đưa ra những tình huống, những ví dụ thực tế cho thấy sự cần thiết phải đưa đến những khái niệm toán học mới. Qua đó, các em sẽ được trau dồi những kĩ năng cần thiết cho một công dân trong thời hiện đại, đó là khả năng “mô hình hoá”. Khi đã đưa vấn đề thực tiễn về bài toán (mô hình toán học), chúng ta sẽ phát hiện thêm những kiến thức toán học mới, để cùng với những kiến thức đã biết giải quyết bài toán thực tiễn đặt ra.\r\n\r\nHi vọng rằng, qua mỗi bài học, mỗi chương sách, qua mỗi vòng lặp từ thực tiễn đến tri thức toán học, rồi từ tri thức toán học quay về thực tiễn, TOÁN 12 sẽ giúp các em trưởng thành nhanh chóng và trở thành người bạn thân thiết của các em.",
+        "sold": 0,
+        "stock": 345,
+        "sale_percent": 0,
+        "category": [
+            8
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 10,
+    "fields": {
+        "name": "Giáo Trình Thực Hành Lái Xe Cơ Bản",
+        "price": "153000",
+        "image": "1127010006330.webp",
+        "detail": "Giáo Trình Thực Hành Lái Xe Cơ Bản\r\n\r\nNội dung chính của Giáo Trình Thực Hành Lái Xe Cơ Bản gồm:\r\n\r\n- Thứ nhất: Trình bày bí quyết lái xe.\r\n\r\nKhông chỉ giúp người bắt đầu học dễ dàng vược qua các vấn đề cơ bản về việc lái xe, sách còn trình bày những cách xử lý cần thiết với sự cố xảy ra lúc lái xe. Nhờ đó, bạn cũng có thể trở thành tài xế giỏi trong thời gian ngắn mà không cần phải vượt qua nhiều trở ngại như trước đây.\r\n\r\n- Thứ 2: Dạy thực hành lái xe.\r\n\r\nNội dung sách lấy nền tảng từ việc dạy lái xe trong thực tế vàđược trình bày theo hệ thống. Nhờ vậy, sách không chỉ giúp giáo viên có một phương pháp dạy hợp lý mà còn giúp người học có thể dễ dàng lái xe thông thạo.\r\n\r\n- Thứ 3: Hướng dẫn thay đổi cách lái xe.\r\n\r\nNếu trước đây bạn lái xe bằng kinh nghiệm \"lạng lách\", lúng túng mỗi khi gặp sự cố và khổ sở vì bị phạt thì từ bây giờ, bạn có thể trở thành một tài xế thông minh vì được học lái xe đúng cách. Giáo Trình Thực Hành Lái Xe Cơ Bản sẽ giúp bạn (vốn lái xe theo kiểu \"chịu đựng gian khổ\" để lấy kinh nghiệm) \"lột xác\".\r\n\r\nTuy vẫn còn khá mới mẻ nhưng giáo trình này được soạn ra với mong muốn đi tiên phong trong việc hướng dẫn những tài xế mới vào nghề học theo văn hóa giao thông tốt đẹp hơn. Bởi đã đến lúc chúng ta phải chấm dứt việc lái xe theo kinh nghiệm.",
+        "sold": 0,
+        "stock": 453,
+        "sale_percent": 0,
+        "category": [
+            9
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 11,
+    "fields": {
+        "name": "Kinh Tế Các Quốc Gia Khu Vực Asean",
+        "price": "101000",
+        "image": "9786047933839.webp",
+        "detail": "LỜI MỞ ĐẦU\r\n\r\nĐáp ứng yêu cầu đào tạo trong điều kiện hội nhập kinh tế quốc tế đang diễn ra mạnh mẽ, Bộ môn Kinh tế quốc tế, Khoa Kinh tế & Kinh Doanh quốc tế, Trường Đại học Thương mại biên soạn Sách tham khảo “Kinh tế các quốc gia khu vực ASEAN”. Cuốn sách này sử dụng làm tài liệu học tập và tham khảo cho sinh viên Trường Đại học Thương mại các chuyên ngành kinh tế, đặc biệt đối với chuyên ngành thương mại quốc tế, chuyên ngành kinh tế quốc tế.\r\n\r\nKhi biên soạn cuốn sách này, chúng tôi đã tham khảo các tài liệu trong và ngoài nước, kế thừa có chọn lọc các ấn phẩm được phát hành chính thức bởi Ban thư ký ASEAN, đồng thời bám sát xu hướng hội nhập kinh tế quốc tế và đặc điểm, điều kiện của Việt Nam để lựa chọn các nội dung cô đọng và thiết thực nhất.\r\n\r\nSách tham khảo “Kinh tế các quốc gia khu vực ASEAN” gồm 3 chương, được biên soạn bởi tập thể giảng viên công tác tại bộ môn Kinh tế quốc tế, Khoa Kinh tế & Kinh doanh quốc tế, Trường Đại học Thương mại.\r\n\r\n- TS. Nguyễn Duy Đạt, Chủ biên, đọc và rà soát, chỉnh sửa bổ sung, trực tiếp viết một phần mục 1.1, một phần mục 1.2 của Chương 1 Chương 2 và Chương 3:\r\n\r\n- ThS. Nguyễn Thùy Dương, Viết 1.3 của Chương 1; - ThS. Lê Quốc Cường, Viết 1.4 của Chương 1:\r\n\r\n- ThS. Nguyễn Ngọc Diệp tham gia viết một phần 1.1; và 1.2 của Chương 1.",
+        "sold": 0,
+        "stock": 345,
+        "sale_percent": 0,
+        "category": [
+            9
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 12,
+    "fields": {
+        "name": "Khám Phá Giáo Dục Steam - 10 Chủ Đề Dạy Học Ở Tiểu Học",
+        "price": "128000",
+        "image": "image_195509_1_45242.webp",
+        "detail": "Nội dung sách bao gồm các chủ đề dạy học được xây dựng theo chương trình giáo dục liên môn STEAM bao gồm Khoa học, Công nghệ, Kỹ thuật, Nghệ Thuật và Toán học.\r\n\r\nCó sự gắn kết giữa bài học sách giáo khoa với các chủ đề thú vị, gần gũi, mang lại tính thực tiễn cao làm cho bài giảng thêm sinh động. Tạo hứng thú cho Học sinh trong quá trình tiến hành hoạt động.\r\n\r\nBộ dụng cụ STEAMKIT đi kèm hỗ trợ cho quá trnihf dạy hojhc và học các chủ đề STEAM đạt kết quả tốt nhất.",
+        "sold": 0,
+        "stock": 222,
+        "sale_percent": 0,
+        "category": [
+            10
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 13,
+    "fields": {
+        "name": "Cẩm Nang Đào Tạo Giáo Viên Và Chăm Sóc Trẻ",
+        "price": "256000",
+        "image": "9786049916052.webp",
+        "detail": "Cẩm Nang Đào Tạo Giáo Viên Và Chăm Sóc Trẻ - The Big Picture 4e And The Business Of The Child Care 4e\r\n\r\nNhững cơ sở giáo dục và chăm sóc trẻ em vận hành theo một quy chế nghiêm ngặt. Sức ép đến từ trách nhiệm mang lại những dịch vụ chất lượng, chi phí tất yếu của dịch vụ và việc đảm bảo các thầy cô nhận được quyền lợi xứng đáng, đã tồn tại nhiều năm trong ngành mà vẫn chưa được giải quyết một cách triệt để. Công tác duy trì chất lượng và tuân theo quy chế gặp nhiều khó khăn. Dù có nhiều cách thức hỗ trợ giảm tải, các thầy cô giáo vẫn là những người “đứng mũi chịu sào” và nhận được rất ít trợ giúp từ chính phủ.\r\n\r\nThách thức đối với những lãnh đạo trong môi trường mầm non chính là phải tìm ra tiếng nói của riêng mình - cho nghề nghiệp của bản thân, cho trẻ em và cho các gia đình. Chính những rào cản về mặt quy chế đã nhấn chìm tiếng nói của những người thấy người cổ dưới muôn vàn kỳ vọng, và cùng lúc cản trở họ hoàn thành vai trò thiêng liêng cốt lõi – là hỗ trợ và nuôi dưỡng cho sự phát triển và trưởng thành của mỗi đứa trẻ. - Phần sách này bắt đầu với rất nhiều băn khoăn về năng lực lãnh đạo – lãnh đạo là gì và nên là gì? Tác giả đã chỉ ra sự khác biệt giữa lãnh đạo và quản lý, cũng như những thách thức khi phải ưu tiên vai trò lãnh đạo trong một môi trường làm việc có nhiều ràng buộc về mặt quy chế.",
+        "sold": 0,
+        "stock": 234,
+        "sale_percent": 0,
+        "category": [
+            10
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 14,
+    "fields": {
+        "name": "Sổ Tay Giáo Viên EFL",
+        "price": "141000",
+        "image": "b_a-s_-tay-gi_o-vi_n-outline-23.04_1.webp",
+        "detail": "Sổ Tay Giáo Viên EFL\r\n\r\nSổ tay giáo viên EFL là cuốn sách cần thiết cho mọi giáo viên dạy tiếng Anh như một ngoại ngữ, từ những người mới vào nghề đến những giáo viên giàu kinh nghiệm muốn nâng cao kỹ năng giảng dạy. Nếu bạn đang tìm kiếm một tài liệu súc tích, thực tiễn, giúp cải thiện hiệu quả giảng dạy trên lớp, đây chính là cuốn sách dành cho bạn.\r\n\r\nCuốn sách cung cấp những kiến thức cốt lõi và kỹ thuật giảng dạy thiết yếu mà mỗi giáo viên EFL cần biết, là những nội dung bao quát nhiều khía cạnh quan trọng của việc giảng dạy như:\r\n\r\n- Phương pháp dạy bốn kỹ năng ngôn ngữ (nghe, nói, đọc, viết) và các yếu tố quan trọng như phát âm, từ vựng, ngữ pháp.\r\n\r\n- 20 kỹ thuật giảng dạy hiệu quả, dễ áp dụng và phù hợp với nhiều bối cảnh lớp học khác nhau\r\n\r\n- Cách thiết kế bài giảng và khóa học hiệu quả dựa trên nguyên lý Bốn sợi dây, đảm bảo sự cân bằng giữa tiếp nhận ý nghĩa, sản sinh ý nghĩa, học kiến thức ngôn ngữ và phát triển lưu loát.\r\n\r\n- Chiến lược xử lý các thách thức trong lớp học như sĩ số đông, học sinh thiếu động lực, trình độ không đồng đều và hành vi chưa phù hợp.\r\n\r\nVới những hướng dẫn giảng dạy thiết thực và dễ áp dụng, cuốn sách sẽ giúp giáo viên nhanh chóng triển khai những thay đổi cần thiết để nâng cao hiệu quả giảng dạy trên lớp, đồng thời giải quyết các thách thức thực tế khi dạy EFL. Lối viết rõ ràng, trực diện, hạn chế biệt ngữ chuyên ngành khiến những lý thuyết và kiến thức chuyên môn trở nên đơn giản, dễ hiểu và dễ tiếp cận đối với giáo viên ở mọi trình độ.",
+        "sold": 0,
+        "stock": 345,
+        "sale_percent": 0,
+        "category": [
+            10
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 15,
+    "fields": {
+        "name": "Hướng Dẫn Ôn Thi Vào Lớp 10 - Môn Tiếng Anh",
+        "price": "61000",
+        "image": "9786040433244_1.webp",
+        "detail": "Hướng Dẫn Ôn Thi Vào Lớp 10 - Môn Tiếng Anh (Theo Định Hướng Phát Triển Năng Lực)\r\n\r\nSách gồm 3 phần:\r\n\r\n- Phần cơ bản: 20 đề, mỗi đề gồm 50-60 câu, kiểm tra kiến thức cơ bản theo chương trình tiếng Anh khối THCS của Bộ GD&ĐT\r\n\r\n- Phần nâng cao: 15 đề, mỗi đề gồm 90-100 câu, kiểm tra kiến thức nâng cao, đặc biệt là về ngữ pháp, nhằm giúp các em ôn luyện đề thi vào các trường chuyên hoặc lớp chuyên Anh.\r\n\r\n- Một số đề thi tuyển sinh: gồm các đề thi tuyển sinh lớp 10 và lớp 10 chuyên Anh năm 2015-2023",
+        "sold": 3,
+        "stock": 354,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 16,
+    "fields": {
+        "name": "P.H.A.O - Pro Hacks For Academic Overload - Toán - Ôn Luyện Thi Tốt Nghiệp THPT-ĐGNL",
+        "price": "55000",
+        "image": "8936225421516.webp",
+        "detail": "P.H.A.O - Pro Hacks For Academic Overload - Toán - Ôn Luyện Thi Tốt Nghiệp THPT-ĐGNL\r\n\r\nBạn đang lo lắng với các môn Toán Văn Sử Địa trong kỳ thi tốt nghiệp THPT hay kỳ thi Đánh giá năng lực?\r\n\r\nBạn cần một giải pháp học nhanh – nhớ lâu – ôn tập thông minh mà không tốn quá nhiều thời gian và chi phí?\r\n\r\nSách P.H.A.O (Pro Hacks for Academic Overload) Toán chính là “vé thông hành” dành cho bạn!\r\n\r\nSách giúp bạn học gọn nhẹ nhưng vẫn toàn diện, chinh phục trọn vẹn các môn học một cách dễ dàng.\r\n\r\nP.H.A.O Toán - Casio + Tổng hợp kiến thức + Toán thực tế\r\n\r\nTuyệt kĩ Casio: Tổng hợp các công thức bấm máy nhanh, gọn\r\n\r\nTruy vết nhanh lý thuyết – Tổng hợp lý thuyết từng chủ đề\r\n\r\nCác lỗi sai thường gặp – Tránh mất điểm oan\r\n\r\nPhương pháp làm bài toán thực tế – Vận dụng hiệu quả cho dạng bài thực tế",
+        "sold": 2,
+        "stock": 244,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 17,
+    "fields": {
+        "name": "Đề Ôn Thi Tuyển Sinh 10 - Môn Ngữ Văn",
+        "price": "99000",
+        "image": "9786326022988.webp",
+        "detail": "Đề Ôn Thi Tuyển Sinh 10 - Môn Ngữ Văn\r\n\r\nTheo tinh thần đổi mới tích cực trong công cuộc dạy học hiện nay, nội dung và hình thức đánh giá học sinh cần có những thay đổi để phù hợp với mục tiêu đào tạo con người trong thời đại mới. Một trong những điểm nhấn quan trọng là việc đổi mới phương thức đánh giá, cấu trúc bài thi, bài kiểm tra để đảm bảo tính công bằng và phát huy năng lực của học sinh. Đối với môn Ngữ văn, bài thi cần có sự kết hợp giữa Trắc nghiệm và Tự luận, Đọc – Hiểu và Làm Văn.\r\n\r\nBài thi kiểm tra năng lực vận dụng kiến thức trong những tình huống khác nhau cũng như kĩ năng tư duy, giải quyết vấn đề của học sinh. Để giúp đồng nghiệp và các em học sinh làm quen với cách thức ôn tập và dạng bài kiểm tra mới, chúng tôi tiến hành biên soạn cuốn Đề Ôn Thi Tuyển Sinh 10 - Môn Ngữ Văn.\r\n\r\nCuốn sách Đề Ôn Thi Tuyển Sinh 10 - Môn Ngữ Văn được biên soạn theo các chủ đề, với các câu hỏi phong phú phục vụ cho việc học – luyện củng cố kiến thức, ôn thi vào lớp 10 Trung học phổ thông.",
+        "sold": 2,
+        "stock": 352,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 18,
+    "fields": {
+        "name": "500 Bài Tập Vật Lí Trung Học Cơ Sở (Dùng Cho Các Bộ SGK Hiện Hành)",
+        "price": "117500",
+        "image": "8935083583862_1.webp",
+        "detail": "500 Bài Tập Vật Lí Trung Học Cơ Sở (Dùng Cho Các Bộ SGK Hiện Hành)\r\n\r\nCông ty Học Liệu Sư Phạm giới thiệu: Nội dung gồm có:\r\n\r\nPhần 1: Cơ học\r\n\r\nPhần 2: Nhiệt học\r\n\r\nPhần 3: Quang học\r\n\r\nPhần 4: Điện học\r\n\r\nTrong mỗi phần thì có các đề mục chính:\r\n\r\n- Kiến thức cơ bản\r\n\r\n- Bài tập\r\n\r\n- Hướng dẫn giải và đáp số",
+        "sold": 2,
+        "stock": 134,
+        "sale_percent": 0,
+        "category": [
+            7
+        ]
+    }
+},
+{
+    "model": "app.product",
+    "pk": 19,
+    "fields": {
+        "name": "Luyện Thi Vào 10 Ngữ Văn - Chinh Phục Nghị Luận Xã Hội Theo Chương Trình Mới Nhất",
+        "price": "95000",
+        "image": "bai-truoc-nlxh.webp",
+        "detail": "Luyện Thi Vào 10 Ngữ Văn - Chinh Phục Nghị Luận Xã Hội Theo Chương Trình Mới Nhất\r\n\r\nBạn từng ngồi hàng tiếng đồng hồ mà vẫn không biết viết gì cho đoạn nghị luận xã hội 200 chữ?\r\n\r\nBạn hiểu đề, thuộc dàn ý, nhưng khi viết lại… bí dẫn chứng, bí từ, bí luôn cả cảm xúc?\r\n\r\nHay bạn lo lắng khi sắp phải đối mặt với kỳ thi vào lớp 10 nhưng vẫn chưa biết cách viết bài nghị luận xã hội để không bị phê “chưa rõ ý”, “lập luận yếu”?\r\n\r\nVậy thì đừng lo! Cuốn sách Luyện thi vào 10 Ngữ văn: Chinh phục nghị luận xã hội theo chương trình mới nhất sẽ giúp bạn gỡ rối mọi khó khăn đó!\r\n\r\nĐược biên soạn bởi Thạc sĩ Ngôn ngữ học Nguyễn Quốc Khánh - người đã có hơn 21 năm kinh nghiệm giảng dạy môn Ngữ văn các cấp THCS và THPT, cuốn sách mang đến bộ công cụ toàn diện để chinh phục mọi dạng bài nghị luận xã hội - từ lý thuyết đến thực hành.\r\n\r\nSách gồm 4 phần trọng tâm, bám sát chương trình Ngữ văn mới:\r\n\r\n- Phần 1: Giúp bạn nắm chắc lý thuyết nền tảng và hiểu đúng bản chất nghị luận xã hội.\r\n\r\n- Phần 2 và 3: Cung cấp cách viết bài nghị luận về vấn đề xã hội, kèm dàn ý, ví dụ và bài mẫu đạt điểm 8+.\r\n\r\n- Phần 4: Cách viết đoạn văn nghị luận xã hội, cùng bộ đề luyện thực chiến, giúp bạn rèn tốc độ viết, khả năng lập luận và phản biện.\r\n\r\nKhông chỉ là tài liệu ôn thi, cuốn sách còn là “người bạn đồng hành” giúp bạn tự tin viết văn mạch lạc, quan điểm rõ ràng, có cảm xúc và ghi trọn điểm.\r\n\r\nNếu bạn đang muốn từ mốc 5-6 bứt phá lên 8+ điểm Ngữ văn, thì cuốn sách này chính là chìa khóa bạn không thể bỏ lỡ!",
+        "sold": 2,
+        "stock": 1445,
+        "sale_percent": 15,
+        "category": [
+            7
+        ]
+    }
+}
+]

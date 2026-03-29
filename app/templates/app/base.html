@@ -42,7 +42,7 @@
         <nav class="navbar navbar-expand-lg ">
             <div class="container">
 
-                
+
                 <div class="d-flex align-items-center gap-3">
                     <a class="navbar-brand" href="{% url 'home' %}">
                         <img src="{% static 'app/images/logostore.png' %}" width="80" height="80" />
@@ -72,8 +72,8 @@
                                            <ul class="list-unstyled category-left">
                                                 {% for cat in categories %}
                                                 <li>
-                                                    <a href="{% url 'category' cat.slug %}" 
-                                                    class="category-parent d-block py-2" 
+                                                    <a href="{% url 'category' cat.slug %}"
+                                                    class="category-parent d-block py-2"
                                                     data-target="cat-{{ cat.id }}">
                                                         {{ cat.name }}
                                                     </a>
@@ -88,7 +88,7 @@
                                             <div class="category-content d-none" id="cat-{{ cat.id }}">
 
                                                 <h5 class="fw-bold mb-3">
-                                                    <a href="{% url 'category' cat.slug %}" 
+                                                    <a href="{% url 'category' cat.slug %}"
                                                     class="text-dark text-decoration-none">
                                                         {{ cat.name }}
                                                     </a>
@@ -97,7 +97,7 @@
                                                 <div class="row">
                                                     {% for sub in cat.sub_categories.all %}
                                                     <div class="col-md-4 mb-2">
-                                                        <a href="{% url 'category' sub.slug %}" 
+                                                        <a href="{% url 'category' sub.slug %}"
                                                         class="sub-link d-block py-1">
                                                             {{ sub.name }}
                                                         </a>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
 
-                
+
                 <div id="search-wrapper" class="mx-auto position-relative" style="width:600px;">
                     <form class="position-relative" method="POST" action="{% url 'search' %}">
                         {% csrf_token %}
@@ -142,10 +142,10 @@
                     </form>
                 </div>
 
-               
+
                 <div class="d-flex align-items-center gap-3">
 
-                 
+
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle"
                         href="#"
@@ -176,7 +176,7 @@
                         </ul>
                     </div>
 
-                    
+
                     <a href="{% url 'cart' %}" class="position-relative">
                         <img src="{% static 'app/images/cart.png' %}" width="40">
                         <span id="cart-total">{{ cartItems }}</span>
@@ -223,10 +223,10 @@
             </h6>
             <small class="opacity-75">Sách giấy cho mọi lứa tuổi</small><br>
         </footer>
-    <script src="{%static 'app/js/cart.js' %}?v=2" > </script>   
+    <script src="{%static 'app/js/cart.js' %}?v=2" > </script>
     <script>
         function parseMarkdownLinks(text) {
-            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, 
+            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
                 '<a href="$2" class="text-primary" style="text-decoration: underline;" target="_blank">$1</a>');
         }
         document.querySelectorAll('.navbar .dropdown').forEach(dropdown => {
@@ -246,8 +246,8 @@
                 }
             });
         });
-        
-        
+
+
         const input = document.getElementById("search-input");
         const box = document.getElementById("suggest-box");
         const wrapper = document.getElementById("search-wrapper");
@@ -256,7 +256,7 @@
         let hasResult = false;
         let closedByMouse = false;
 
-        
+
         input.addEventListener("keyup", function () {
             const keyword = this.value.trim();
             lastKeyword = keyword;
@@ -284,12 +284,16 @@
                         a.href = `/detail/${item.id}/`;
                         a.className = "suggest-item d-flex gap-2";
 
+                        const imgSrc = item.image
+                            ? `/static/images/${item.image}`
+                            : '/static/images/no-image.png';
+
                         const priceText = item.price
                             ? Number(item.price).toLocaleString() + " đ"
                             : "";
 
                         a.innerHTML = `
-                            <img src="${item.image || ''}"
+                            <img src="${imgSrc}"
                                 style="width:60px;height:80px;object-fit:cover;border-radius:4px;">
                             <div class="flex-grow-1">
                                 <div class="suggest-name"
@@ -308,7 +312,7 @@
                 });
         });
 
-      
+
         input.addEventListener("click", function () {
             if (lastKeyword && hasResult) {
                 box.style.display = "grid";
@@ -316,7 +320,7 @@
             }
         });
 
-        
+
         wrapper.addEventListener("mouseleave", function () {
             box.style.display = "none";
             closedByMouse = true;
@@ -325,7 +329,7 @@
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', function (e) {
 
-                
+
                 if (e.target.closest('.update-cart')) {
                     return;
                 }
@@ -360,8 +364,8 @@
             });
 
         });
-        
-    
+
+
     document.addEventListener("DOMContentLoaded", function() {
         const chatCircle = document.getElementById('chat-circle');
         const chatBox = document.getElementById('chat-box');
@@ -370,28 +374,28 @@
         const chatSend = document.getElementById('chat-send');
         const chatContent = document.getElementById('chat-content');
 
-        
+
         chatCircle.onclick = () => chatBox.classList.toggle('d-none');
         chatClose.onclick = () => chatBox.classList.add('d-none');
 
-        
+
         function sendMessage() {
             const msg = chatInput.value.trim();
             if (!msg) return;
 
-            
+
             const userDiv = document.createElement('div');
             userDiv.className = "mb-2 text-end";
             const userSpan = document.createElement('span');
             userSpan.className = "bg-success text-white p-2 rounded d-inline-block";
-            userSpan.textContent = msg; 
+            userSpan.textContent = msg;
             userDiv.appendChild(userSpan);
             chatContent.appendChild(userDiv);
-            
+
             chatInput.value = "";
             chatContent.scrollTop = chatContent.scrollHeight;
 
-            
+
             const loaderId = 'bot-loader';
             const loaderDiv = document.createElement('div');
             loaderDiv.id = loaderId;
@@ -400,7 +404,7 @@
             chatContent.appendChild(loaderDiv);
             chatContent.scrollTop = chatContent.scrollHeight;
 
-            
+
             fetch('/api/chatbot/', {
                 method: 'POST',
                 headers: {
@@ -410,18 +414,18 @@
                 body: JSON.stringify({ message: msg })
             })
             .then(res => res.json())
-            
+
             .then(data => {
                 document.getElementById(loaderId).remove();
-                
+
                 const botDiv = document.createElement('div');
                 botDiv.className = "mb-2 text-start";
                 const botSpan = document.createElement('span');
                 botSpan.className = "bg-light p-2 rounded d-inline-block";
-                
-                
-                botSpan.innerHTML = parseMarkdownLinks(data.reply); 
-                
+
+
+                botSpan.innerHTML = parseMarkdownLinks(data.reply);
+
                 botDiv.appendChild(botSpan);
                 chatContent.appendChild(botDiv);
                 chatContent.scrollTop = chatContent.scrollHeight;
@@ -439,7 +443,7 @@
         chatInput.onkeypress = (e) => { if(e.key === "Enter") sendMessage(); };
     });
     </script>
-    
+
 
     <div id="chat-circle" class="btn btn-success rounded-circle shadow-lg position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; cursor: pointer; z-index: 1000;">
         <i class="bi bi-chat-dots-fill fs-3"></i>
@@ -463,5 +467,5 @@
         </div>
     </div>
     </body>
-    
+
 </html>

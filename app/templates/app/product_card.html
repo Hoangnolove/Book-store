@@ -1,8 +1,9 @@
 {% load humanize %}
+{% load static %}
 <div class="product-card h-100 border-0 shadow-sm p-2 rounded {% if product.stock == 0 %}opacity-75{% endif %}">
     <a href="{% url 'detail' product.id %}" class="text-decoration-none text-dark">
         <div class="position-relative">
-            <img src="{{ product.ImageURL }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain;">
+            <img src="{% static 'images/' %}{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain;">
             
             {% if product.sale_percent > 0 and product.stock > 0 %}
                 <span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 m-2 rounded fw-bold" style="font-size: 0.8rem;">

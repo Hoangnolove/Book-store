@@ -20,7 +20,7 @@
                         </div>
                     {% endif %}
 
-                    <img src="{{ product.ImageURL }}" 
+                    <img src="{% static 'images/' %}{{ product.image }}" 
                          class="img-fluid rounded-2 transition-zoom" 
                          style="max-height: 480px; width: 100%; object-fit: contain; {% if product.stock == 0 %}filter: grayscale(0.5);{% endif %}" 
                          alt="{{ product.name }}">
